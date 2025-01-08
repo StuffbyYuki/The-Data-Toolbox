@@ -3,6 +3,12 @@ gateways:
     connection:
       type: duckdb
       database: db.db
+    test_connection:
+      type: duckdb
+      database: test.db
+    state_connection:
+      type: duckdb
+      database: state.db
 
 default_gateway: local
 
