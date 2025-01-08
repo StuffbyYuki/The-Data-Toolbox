@@ -14,4 +14,4 @@ default_gateway: local
 
 model_defaults:
   dialect: duckdb
-  start: 2025-01-07
+  start: 2025-01-08
