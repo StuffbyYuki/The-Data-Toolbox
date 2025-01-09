@@ -1,0 +1,36 @@
+test_intermediate_model:
+  model: example.intermediate_model
+  inputs:
+    example.base_model:
+    - id: 1
+      letter: A
+      value: 10
+      updated_date: 2025-01-07
+    - id: 2
+      letter: B
+      value: 20
+      updated_date: 2025-01-07
+    - id: 3
+      letter: C
+      value: 30
+      updated_date: 2025-01-07
+  outputs:
+    query:
+    - id: 1
+      letter: A
+      value: 10
+      big_value: 100
+      updated_date: 2025-01-07
+      new_col: new_col
+    - id: 2
+      letter: B
+      value: 20
+      big_value: 200
+      updated_date: 2025-01-07
+      new_col: new_col
+    - id: 3
+      letter: C
+      value: 30
+      big_value: 300
+      updated_date: 2025-01-07
+      new_col: new_col
