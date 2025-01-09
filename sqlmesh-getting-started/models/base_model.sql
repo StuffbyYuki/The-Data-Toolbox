@@ -9,6 +9,11 @@ MODEL (
         letter = 'alphabet letter',
         value = 'random value',
         updated_date = 'updated date'
+    ),
+    audits (
+      assert_positive_ids,
+      unique_values(columns = id),
+      not_null(columns = id)
     )
   );
 

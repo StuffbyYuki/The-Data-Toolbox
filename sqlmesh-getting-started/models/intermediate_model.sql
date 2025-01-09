@@ -17,6 +17,7 @@ MODEL (
     id,
     letter,
     value,
+    @multiply_by_10(value) AS big_value,
     updated_date,
     'new_col' AS new_col
   FROM
