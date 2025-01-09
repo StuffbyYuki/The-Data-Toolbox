@@ -1,19 +1,26 @@
 MODEL (
-    name sqlmesh_example.incremental_model,
+    name example.incremental_model,
+    owner Yuki,
     kind INCREMENTAL_BY_TIME_RANGE (
-      time_column event_date
+        time_column (updated_date, '%Y-%m-%d'),
+        lookback 5,  -- to handle late arriving date
     ),
-    start '2020-01-01',
+    start '2025-01-01',
     cron '@daily',
-    grain (id, event_date)
+    grain id,
+    column_descriptions (
+        id = 'primary key',
+        letter = 'alphabet letter',
+        updated_date = 'updated date',
+    )
   );
 
   SELECT
     id,
-    item_id,
-    event_date,
+    letter,
+    updated_date
   FROM
-    sqlmesh_example.seed_model
-  WHERE
-    event_date BETWEEN @start_date AND @end_date
+    example.base_model
+  WHERE 
+    updated_date BETWEEN @start_date AND @end_date
   

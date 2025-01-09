@@ -1,0 +1,6 @@
+- name: '"db"."example"."letters"'
+  columns:
+    id: INT
+    letter: TEXT
+    value: INT
+    updated_date: DATE
