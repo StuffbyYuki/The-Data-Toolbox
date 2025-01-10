@@ -34,7 +34,7 @@ def execute(
     end: datetime,
     execution_time: datetime,
     **kwargs: t.Any,
-):
+) -> pd.DataFrame:
 
     table = context.resolve_table("example.base_model")
     df = (
