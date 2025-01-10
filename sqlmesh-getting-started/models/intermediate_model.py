@@ -36,14 +36,18 @@ def execute(
     execution_time: datetime,
     **kwargs: t.Any,
 ) -> pd.DataFrame:
+    
     table = context.resolve_table("example.base_model")
-    df = pl.from_pandas(context.fetchdf(f"SELECT * FROM {table}")).select(
-        "id",
-        "letter",
-        "value",
-        pl.col("value").mul(10).alias("big_value"),
-        "updated_date",
-        pl.lit("new_col").alias("new_col"),
+    df = (
+        pl.from_pandas(context.fetchdf(f"SELECT * FROM {table}"))
+        .select(
+            "id",
+            "letter",
+            "value",
+            pl.col("value").mul(10).alias("big_value"),
+            "updated_date",
+            pl.lit("new_col").alias("new_col"),
+        )
     )
 
     return df.to_pandas()
