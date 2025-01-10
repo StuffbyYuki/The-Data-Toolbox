@@ -4,14 +4,14 @@
   <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
   <script type="text/javascript">
-    var nodes = new vis.DataSet([{"id": "\"db\".\"example\".\"base_model\"", "label": "\"base_model\"", "title": "<span>\"db\".\"example\".\"base_model\"</span>"}, {"id": "\"db\".\"example\".\"letters\"", "label": "\"letters\"", "title": "<span>\"db\".\"example\".\"letters\"</span>"}, {"id": "\"db\".\"example\".\"incremental_model\"", "label": "\"incremental_model\"", "title": "<span>\"db\".\"example\".\"incremental_model\"</span>"}, {"id": "\"db\".\"example\".\"intermediate_model\"", "label": "\"intermediate_model\"", "title": "<span>\"db\".\"example\".\"intermediate_model\"</span>"}])
+    var nodes = new vis.DataSet([{"id": "\"db\".\"example\".\"base_model\"", "label": "\"base_model\"", "title": "<span>\"db\".\"example\".\"base_model\"</span>"}, {"id": "\"db\".\"example\".\"letters\"", "label": "\"letters\"", "title": "<span>\"db\".\"example\".\"letters\"</span>"}, {"id": "\"db\".\"example\".\"incremental_model\"", "label": "\"incremental_model\"", "title": "<span>\"db\".\"example\".\"incremental_model\"</span>"}, {"id": "\"db\".\"example\".\"intermediate_model\"", "label": "\"intermediate_model\"", "title": "<span>\"db\".\"example\".\"intermediate_model\"</span>"}, {"id": "\"db\".\"example\".\"intermediate_py_model\"", "label": "\"intermediate_py_model\"", "title": "<span>\"db\".\"example\".\"intermediate_py_model\"</span>"}])
     nodes.forEach(row => row["title"] = new DOMParser().parseFromString(row["title"], "text/html").body.childNodes[0])
 
     new vis.Network(
         document.getElementById("sqlglot-lineage"),
         {
             nodes: nodes,
-            edges: new vis.DataSet([{"from": "\"db\".\"example\".\"letters\"", "to": "\"db\".\"example\".\"base_model\""}, {"from": "\"db\".\"example\".\"base_model\"", "to": "\"db\".\"example\".\"incremental_model\""}, {"from": "\"db\".\"example\".\"base_model\"", "to": "\"db\".\"example\".\"intermediate_model\""}])
+            edges: new vis.DataSet([{"from": "\"db\".\"example\".\"letters\"", "to": "\"db\".\"example\".\"base_model\""}, {"from": "\"db\".\"example\".\"base_model\"", "to": "\"db\".\"example\".\"incremental_model\""}, {"from": "\"db\".\"example\".\"base_model\"", "to": "\"db\".\"example\".\"intermediate_model\""}, {"from": "\"db\".\"example\".\"base_model\"", "to": "\"db\".\"example\".\"intermediate_py_model\""}])
         },
         {"height": "100%", "width": "100%", "layout": {"hierarchical": {"enabled": true, "nodeSpacing": 200, "sortMethod": "directed"}}, "interaction": {}, "physics": {"enabled": false}, "edges": {"arrows": "to"}, "nodes": {"shape": "box"}},
     )
