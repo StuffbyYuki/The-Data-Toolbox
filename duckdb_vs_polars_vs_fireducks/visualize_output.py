@@ -13,13 +13,13 @@ def visualize_output(data):
         y='time in seconds', 
         hue='library', 
         errorbar=None, 
-        palette=['#FFF208', '#075AFE']
+        palette=['#FFF208', '#FF6B6B', '#075AFE']
     )
     
     for container in ax.containers:
         ax.bar_label(container)
-
+    
     ax.set(xlabel='', ylabel='Time in Seconds')
-    plt.title('DuckDB vs Polars - Speed Comparison')
+    plt.title('DuckDB vs Pandas vs Polars - Speed Comparison')
     plt.savefig('output.png')
     plt.show()
