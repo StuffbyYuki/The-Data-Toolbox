@@ -1,5 +1,5 @@
 import pandas as pd
-
+from config import DATA_FILE_PATH_STR
 def join_pandas(file_path):
     df = pd.read_csv(file_path, engine='pyarrow', dtype_backend='pyarrow')
     df['pickup_month'] = pd.to_datetime(df['tpep_pickup_datetime'], format='%m/%d/%Y %I:%M:%S %p').dt.month
@@ -14,4 +14,4 @@ def join_pandas(file_path):
     )
 
 if __name__ == '__main__':
-    print(join_pandas('data/2021_Yellow_Taxi_Trip_Data.csv')) 
+    print(join_pandas(DATA_FILE_PATH_STR)) 

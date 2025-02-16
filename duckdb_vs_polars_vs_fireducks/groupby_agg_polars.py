@@ -1,5 +1,5 @@
 import polars as pl 
-
+from config import DATA_FILE_PATH_STR
 def groupby_agg_polars(file_path):
     lf = pl.scan_csv(file_path)
     return (
@@ -15,4 +15,4 @@ def groupby_agg_polars(file_path):
     )
 
 if __name__ == '__main__':
-    print(groupby_agg_polars('data/2021_Yellow_Taxi_Trip_Data.csv'))
+    print(groupby_agg_polars(DATA_FILE_PATH_STR))

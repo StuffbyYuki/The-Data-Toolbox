@@ -20,6 +20,6 @@ def visualize_output(data):
         ax.bar_label(container)
     
     ax.set(xlabel='', ylabel='Time in Seconds')
-    plt.title('DuckDB vs Pandas vs Polars - Speed Comparison')
+    plt.title('DuckDB vs Polars vs Fireducks - Speed Comparison')
     plt.savefig('output.png')
     plt.show()

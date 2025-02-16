@@ -1,5 +1,5 @@
 import polars as pl
-
+from config import DATA_FILE_PATH_STR
 def join_polars(file_path):
     base_lf = (
         pl.scan_csv(file_path)
@@ -27,4 +27,4 @@ def join_polars(file_path):
     )
 
 if __name__ == '__main__':
-    print(join_polars('data/2021_Yellow_Taxi_Trip_Data.csv'))
+    print(join_polars(DATA_FILE_PATH_STR))

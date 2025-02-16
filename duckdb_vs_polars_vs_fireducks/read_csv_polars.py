@@ -1,8 +1,8 @@
 import polars as pl
-
+from config import DATA_FILE_PATH_STR
 def read_csv_polars(file_path):
     lf = pl.scan_csv(file_path)
     return lf.collect()
 
 if __name__ == '__main__':
-    print(read_csv_polars('data/2021_Yellow_Taxi_Trip_Data.csv'))
+    print(read_csv_polars(DATA_FILE_PATH_STR))

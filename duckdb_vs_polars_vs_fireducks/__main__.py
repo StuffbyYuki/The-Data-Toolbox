@@ -2,9 +2,9 @@ import importlib
 import pathlib
 import time
 from visualize_output import visualize_output
+from config import DATA_FILE_PATH_STR
 
 def main():
-    file_path = 'data/2021_Yellow_Taxi_Trip_Data.csv'
     outputs = []
     this_dir = pathlib.Path(__file__).parent
 
@@ -16,7 +16,7 @@ def main():
         library = func_name.split('_')[-1]
 
         start = time.time()
-        benchmark_function(file_path)
+        benchmark_function(DATA_FILE_PATH_STR)
         end = time.time()
         seconds = round(end - start, 2)
         print(func_name, seconds)
