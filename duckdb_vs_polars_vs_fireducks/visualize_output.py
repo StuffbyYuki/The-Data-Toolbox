@@ -13,7 +13,7 @@ def visualize_output(data):
         y="time in seconds",
         hue="library",
         errorbar=None,
-        palette=["#FFF208", "#FF6B6B", "#075AFE"],
+        palette=["#FFF208", "#FF6B6B", "#0A5301"],
     )
 
     for container in ax.containers:
