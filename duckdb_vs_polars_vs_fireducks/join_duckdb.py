@@ -1,13 +1,15 @@
 import duckdb
-from config import DATA_FILE_PATH_STR
+from config import DATA_FILE_PATH_STR, DUCKDB_DTYPES
+
+
 def join_duckdb(file_path):
-    query = f'''
+    query = f"""
 
         with base as (
             select 
                 *,
-                month(tpep_pickup_datetime) pickup_month,
-            from "{file_path}"
+                EXTRACT(MONTH FROM STRPTIME(tpep_pickup_datetime, '%m/%d/%Y %I:%M:%S %p')) AS pickup_month,
+            from read_csv("{file_path}", columns={DUCKDB_DTYPES})
         ),
         
         join_data as (
@@ -28,8 +30,9 @@ def join_duckdb(file_path):
         inner join join_data
             using (VendorID, payment_type, pickup_month) 
         ;
-    '''
+    """
     return duckdb.sql(query).arrow()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print(join_duckdb(DATA_FILE_PATH_STR))
