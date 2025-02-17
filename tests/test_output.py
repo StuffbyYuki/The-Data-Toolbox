@@ -2,10 +2,11 @@ import pytest
 import polars as pl
 import duckdb
 from polars.testing import assert_frame_equal
+from duckdb_vs_polars_vs_fireducks.config import DATA_FILE_PATH_STR, POLARS_DTYPES
 
 @pytest.fixture
 def lf():
-    return pl.scan_csv('data/2021_Yellow_Taxi_Trip_Data.csv')
+    return pl.scan_csv(DATA_FILE_PATH_STR, schema=POLARS_DTYPES).head(1000)
 
 def test_agg(lf):
     polars_df = (
