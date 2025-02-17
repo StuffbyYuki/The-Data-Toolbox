@@ -3,7 +3,9 @@ from config import DATA_FILE_PATH_STR, PANDAS_DTYPES
 
 
 def window_func_pandas(file_path):
-    df = pd.read_csv(file_path, engine="pyarrow", dtype_backend="pyarrow", dtype=PANDAS_DTYPES)
+    df = pd.read_csv(
+        file_path, engine="pyarrow", dtype_backend="pyarrow", dtype=PANDAS_DTYPES
+    )
     return pd.DataFrame(
         {
             "avg_fare_per_vendor": df.groupby("VendorID")["fare_amount"].transform(
