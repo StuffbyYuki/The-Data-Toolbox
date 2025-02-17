@@ -5,11 +5,16 @@ from config import DATA_FILE_PATH_STR, DUCKDB_DTYPES
 def join_duckdb(file_path):
     query = f"""
 
-        with base as (
+        with source as (
+            select *
+            from read_csv("{file_path}", columns={DUCKDB_DTYPES})
+        ),
+        
+        base as (
             select 
                 *,
                 EXTRACT(MONTH FROM STRPTIME(tpep_pickup_datetime, '%m/%d/%Y %I:%M:%S %p')) AS pickup_month,
-            from read_csv("{file_path}", columns={DUCKDB_DTYPES})
+            from source
         ),
         
         join_data as (
