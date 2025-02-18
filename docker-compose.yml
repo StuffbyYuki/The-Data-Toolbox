@@ -1,8 +1,12 @@
 services:
   app:
-    build: .
+    build: 
+      context: .
+      args:
+        - FILE_TYPE=${FILE_TYPE:-csv}
     volumes:
       - ./data:/app/data
     environment:
       - PYTHONUNBUFFERED=1
+      - FILE_TYPE=${FILE_TYPE:-csv}
     platform: linux/amd64

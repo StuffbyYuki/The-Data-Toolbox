@@ -14,7 +14,7 @@ def main():
     parser.add_argument(
         "--file-type",
         choices=["csv", "parquet"],
-        default="parquet",
+        default="csv",
         help="File type to use for benchmarks (default: parquet)",
     )
 
