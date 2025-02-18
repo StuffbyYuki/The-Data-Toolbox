@@ -21,4 +21,4 @@ def join_fireducks(file_path):
 
 
 if __name__ == "__main__":
-    print(join_fireducks(DATA_FILE_PATH_STR)) 
+    print(join_fireducks(DATA_FILE_PATH_STR))

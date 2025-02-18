@@ -13,4 +13,4 @@ def agg_fireducks(file_path):
 
 
 if __name__ == "__main__":
-    print(agg_fireducks(DATA_FILE_PATH_STR)) 
+    print(agg_fireducks(DATA_FILE_PATH_STR))

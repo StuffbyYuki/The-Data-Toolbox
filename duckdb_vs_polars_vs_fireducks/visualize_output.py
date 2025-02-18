@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 
 def visualize_output(data):
     sns.set_style(style=None)
-    df = pl.DataFrame(data, schema=["time in seconds", "query type", "library"], orient="row")
+    df = pl.DataFrame(
+        data, schema=["time in seconds", "query type", "library"], orient="row"
+    )
     plt.figure(figsize=(20, 8))
     ax = sns.barplot(
         df,
