@@ -6,6 +6,7 @@ from duckdb_vs_polars_vs_fireducks.utils import read_data_duckdb
 def window_func_duckdb(file_path):
     query = f"""
         select 
+            avg(fare_amount) over(partition by VendorID) avg_fare_per_vendor,
             dense_rank() over(partition by payment_type order by total_amount desc) 
         from {read_data_duckdb(file_path)}
         ;

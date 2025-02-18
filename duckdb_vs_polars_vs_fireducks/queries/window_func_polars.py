@@ -6,6 +6,7 @@ from duckdb_vs_polars_vs_fireducks.utils import read_data_polars
 def window_func_polars(file_path):
     lf = read_data_polars(file_path)
     return lf.select(
+        avg_fare_per_vendor=pl.col("fare_amount").mean().over("VendorID"),
         ttl_amt_rank_per_pay_type=pl.col("total_amount")
         .rank(method="dense", descending=True)
         .over("payment_type"),
