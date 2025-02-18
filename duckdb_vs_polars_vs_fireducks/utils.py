@@ -23,5 +23,7 @@ def read_data_polars(file_path):
 def read_data_fireducks(file_path):
     """Read file with Fireducks using appropriate method based on file type."""
     if file_path.endswith(".csv"):
-        return pd.read_csv(file_path, dtype=PANDAS_DTYPES)
+        return pd.read_csv(
+            file_path, engine="pyarrow", dtype_backend="pyarrow", dtype=PANDAS_DTYPES
+        )
     return pd.read_parquet(file_path)
