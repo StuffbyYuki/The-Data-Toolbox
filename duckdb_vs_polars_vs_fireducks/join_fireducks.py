@@ -1,9 +1,10 @@
 import fireducks.pandas as pd
-from config import DATA_FILE_PATH_STR
+from config import get_data_file_path_str
+from utils import read_data_fireducks
 
 
 def join_fireducks(file_path):
-    df = pd.read_csv(file_path, engine="pyarrow", dtype_backend="pyarrow")
+    df = read_data_fireducks(file_path)
     df["pickup_month"] = pd.to_datetime(
         df["tpep_pickup_datetime"], format="%m/%d/%Y %I:%M:%S %p"
     ).dt.month
@@ -17,8 +18,8 @@ def join_fireducks(file_path):
 
     return df.merge(
         agg_df, on=["VendorID", "payment_type", "pickup_month"], how="inner"
-    )
+    )._evaluate()
 
 
 if __name__ == "__main__":
-    print(join_fireducks(DATA_FILE_PATH_STR))
+    print(join_fireducks(get_data_file_path_str("parquet")))

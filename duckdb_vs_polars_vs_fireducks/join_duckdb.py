@@ -1,13 +1,13 @@
 import duckdb
-from config import DATA_FILE_PATH_STR, DUCKDB_DTYPES
+from config import get_data_file_path_str
+from utils import read_data_duckdb
 
 
 def join_duckdb(file_path):
     query = f"""
-
         with source as (
             select *
-            from read_csv("{file_path}", columns={DUCKDB_DTYPES})
+            from {read_data_duckdb(file_path)}
         ),
         
         base as (
@@ -40,4 +40,4 @@ def join_duckdb(file_path):
 
 
 if __name__ == "__main__":
-    print(join_duckdb(DATA_FILE_PATH_STR))
+    print(join_duckdb(get_data_file_path_str("parquet")))

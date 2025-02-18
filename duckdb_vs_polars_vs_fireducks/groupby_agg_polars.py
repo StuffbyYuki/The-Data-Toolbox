@@ -1,9 +1,10 @@
 import polars as pl
-from config import DATA_FILE_PATH_STR, POLARS_DTYPES
+from config import get_data_file_path_str
+from utils import read_data_polars
 
 
 def groupby_agg_polars(file_path):
-    lf = pl.scan_csv(file_path, schema=POLARS_DTYPES)
+    lf = read_data_polars(file_path)
     return (
         lf.group_by("VendorID", "payment_type")
         .agg(
@@ -17,4 +18,4 @@ def groupby_agg_polars(file_path):
 
 
 if __name__ == "__main__":
-    print(groupby_agg_polars(DATA_FILE_PATH_STR))
+    print(groupby_agg_polars(get_data_file_path_str("parquet")))

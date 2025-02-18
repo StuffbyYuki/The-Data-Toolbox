@@ -1,5 +1,6 @@
 import duckdb
-from config import DATA_FILE_PATH_STR, DUCKDB_DTYPES
+from config import get_data_file_path_str
+from utils import read_data_duckdb
 
 
 def groupby_agg_duckdb(file_path):
@@ -11,7 +12,7 @@ def groupby_agg_duckdb(file_path):
             avg(total_amount),
             min(total_amount),
             max(total_amount)
-        from read_csv("{file_path}", columns={DUCKDB_DTYPES})
+        from {read_data_duckdb(file_path)}
         group by
             VendorID,
             payment_type
@@ -21,4 +22,4 @@ def groupby_agg_duckdb(file_path):
 
 
 if __name__ == "__main__":
-    print(groupby_agg_duckdb(DATA_FILE_PATH_STR))
+    print(groupby_agg_duckdb(get_data_file_path_str("parquet")))

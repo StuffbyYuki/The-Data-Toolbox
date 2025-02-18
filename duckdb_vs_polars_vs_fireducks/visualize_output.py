@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def visualize_output(data):
+def visualize_output(data, file_type):
     sns.set_style(style=None)
     df = pl.DataFrame(
         data, schema=["time in seconds", "query type", "library"], orient="row"
@@ -22,6 +22,6 @@ def visualize_output(data):
         ax.bar_label(container)
 
     ax.set(xlabel="", ylabel="Time in Seconds")
-    plt.title("DuckDB vs Polars vs Fireducks - Speed Comparison")
-    plt.savefig("output.png")
+    plt.title(f"DuckDB vs Polars vs Fireducks - Speed Comparison ({file_type})")
+    plt.savefig(f"output_{file_type}.png")
     plt.show()

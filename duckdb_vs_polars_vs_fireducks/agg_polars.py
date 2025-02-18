@@ -1,9 +1,10 @@
 import polars as pl
-from config import DATA_FILE_PATH_STR, POLARS_DTYPES
+from config import get_data_file_path_str
+from utils import read_data_polars
 
 
 def agg_polars(file_path):
-    lf = pl.scan_csv(file_path, schema=POLARS_DTYPES)
+    lf = read_data_polars(file_path)
     return lf.select(
         sum=pl.col("total_amount").sum(),
         avg=pl.col("total_amount").mean(),
@@ -13,4 +14,4 @@ def agg_polars(file_path):
 
 
 if __name__ == "__main__":
-    print(agg_polars(DATA_FILE_PATH_STR))
+    print(agg_polars(get_data_file_path_str("parquet")))

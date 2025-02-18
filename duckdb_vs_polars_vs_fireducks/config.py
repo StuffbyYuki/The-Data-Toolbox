@@ -6,13 +6,21 @@ import polars as pl
 # Base data directory
 DATA_DIR = Path("data")
 
-# Main data file path
-DATA_FILE_PATH = DATA_DIR / "2023_Yellow_Taxi_Trip_Data.csv"
 
-# Convert to string for compatibility with all libraries
-DATA_FILE_PATH_STR = str(DATA_FILE_PATH)
+def get_data_file_path(file_type: str) -> Path:
+    """Get the appropriate data file path based on file type."""
+    if file_type not in ["csv", "parquet"]:
+        raise ValueError("file_type must be either 'csv' or 'parquet'")
 
-# Schema definitions for each library
+    return DATA_DIR / f"2023_Yellow_Taxi_Trip_Data.{file_type}"
+
+
+def get_data_file_path_str(file_type: str) -> str:
+    """Get the data file path as string based on file type."""
+    return str(get_data_file_path(file_type))
+
+
+# Schema definitions for CSV files
 PANDAS_DTYPES = {
     "VendorID": "Int64",
     "tpep_pickup_datetime": "string",

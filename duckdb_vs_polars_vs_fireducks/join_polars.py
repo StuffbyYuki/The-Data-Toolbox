@@ -1,12 +1,10 @@
 import polars as pl
-from config import DATA_FILE_PATH_STR, POLARS_DTYPES
+from config import get_data_file_path_str
+from utils import read_data_polars
 
 
 def join_polars(file_path):
-    base_lf = pl.scan_csv(
-        file_path,
-        schema=POLARS_DTYPES,
-    ).with_columns(
+    base_lf = read_data_polars(file_path).with_columns(
         pl.col("tpep_pickup_datetime")
         .str.to_datetime("%m/%d/%Y %I:%M:%S %p")
         .dt.month()
@@ -21,4 +19,4 @@ def join_polars(file_path):
 
 
 if __name__ == "__main__":
-    print(join_polars(DATA_FILE_PATH_STR))
+    print(join_polars(get_data_file_path_str("parquet")))
