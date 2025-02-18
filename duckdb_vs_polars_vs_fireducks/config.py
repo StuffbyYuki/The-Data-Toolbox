@@ -5,6 +5,7 @@ import polars as pl
 
 # Base data directory
 DATA_DIR = Path("data")
+DATASET_NAME = "2023_Yellow_Taxi_Trip_Data"
 
 
 def get_data_file_path(file_type: str) -> Path:
@@ -12,7 +13,7 @@ def get_data_file_path(file_type: str) -> Path:
     if file_type not in ["csv", "parquet"]:
         raise ValueError("file_type must be either 'csv' or 'parquet'")
 
-    return DATA_DIR / f"2023_Yellow_Taxi_Trip_Data.{file_type}"
+    return DATA_DIR / f"{DATASET_NAME}.{file_type}"
 
 
 def get_data_file_path_str(file_type: str) -> str:
