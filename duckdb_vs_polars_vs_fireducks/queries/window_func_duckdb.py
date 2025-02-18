@@ -1,6 +1,6 @@
 import duckdb
-from config import get_data_file_path_str
-from utils import read_data_duckdb
+from duckdb_vs_polars_vs_fireducks.config import get_data_file_path_str
+from duckdb_vs_polars_vs_fireducks.utils import read_data_duckdb
 
 
 def window_func_duckdb(file_path):
@@ -14,4 +14,4 @@ def window_func_duckdb(file_path):
 
 
 if __name__ == "__main__":
-    print(window_func_duckdb(get_data_file_path_str("parquet")))
+    print(window_func_duckdb(get_data_file_path_str("parquet"))) 

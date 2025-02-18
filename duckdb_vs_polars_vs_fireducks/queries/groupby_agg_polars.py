@@ -1,6 +1,6 @@
 import polars as pl
-from config import get_data_file_path_str
-from utils import read_data_polars
+from duckdb_vs_polars_vs_fireducks.config import get_data_file_path_str
+from duckdb_vs_polars_vs_fireducks.utils import read_data_polars
 
 
 def groupby_agg_polars(file_path):
@@ -18,4 +18,4 @@ def groupby_agg_polars(file_path):
 
 
 if __name__ == "__main__":
-    print(groupby_agg_polars(get_data_file_path_str("parquet")))
+    print(groupby_agg_polars(get_data_file_path_str("parquet"))) 

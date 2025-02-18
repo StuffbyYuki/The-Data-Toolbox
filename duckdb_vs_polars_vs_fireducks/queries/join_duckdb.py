@@ -1,6 +1,6 @@
 import duckdb
-from config import get_data_file_path_str
-from utils import read_data_duckdb
+from duckdb_vs_polars_vs_fireducks.config import get_data_file_path_str
+from duckdb_vs_polars_vs_fireducks.utils import read_data_duckdb
 
 
 def join_duckdb(file_path):
@@ -40,4 +40,4 @@ def join_duckdb(file_path):
 
 
 if __name__ == "__main__":
-    print(join_duckdb(get_data_file_path_str("parquet")))
+    print(join_duckdb(get_data_file_path_str("parquet"))) 

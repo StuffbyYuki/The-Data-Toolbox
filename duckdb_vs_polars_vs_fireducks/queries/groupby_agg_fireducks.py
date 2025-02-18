@@ -1,5 +1,5 @@
-from config import get_data_file_path_str
-from utils import read_data_fireducks
+from duckdb_vs_polars_vs_fireducks.config import get_data_file_path_str
+from duckdb_vs_polars_vs_fireducks.utils import read_data_fireducks
 
 
 def groupby_agg_fireducks(file_path):
@@ -12,4 +12,4 @@ def groupby_agg_fireducks(file_path):
 
 
 if __name__ == "__main__":
-    print(groupby_agg_fireducks(get_data_file_path_str("parquet")))
+    print(groupby_agg_fireducks(get_data_file_path_str("parquet"))) 

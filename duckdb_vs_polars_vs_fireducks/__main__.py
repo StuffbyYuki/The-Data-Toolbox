@@ -19,36 +19,33 @@ def main():
     )
 
     args = parser.parse_args()
-
-    # Get file path based on argument
     file_path = get_data_file_path_str(args.file_type)
 
     outputs = []
-    this_dir = pathlib.Path(__file__).parent
+    queries_dir = pathlib.Path(__file__).parent / "queries"
 
     matches = [
         f
         for pattern in ["*duckdb.py", "*fireducks.py", "*polars.py"]
-        for f in this_dir.glob(pattern)
+        for f in queries_dir.glob(pattern)
     ]
 
     for benchmark in sorted(matches):
-        module_name = func_name = benchmark.with_suffix("").name
+        module_name = f"queries.{benchmark.with_suffix('').name}"
         module = importlib.import_module(module_name)
-        benchmark_function = getattr(module, func_name)
-        query_type = "_".join(func_name.split("_")[:-1])
-        library = func_name.split("_")[-1]
+        benchmark_function = getattr(module, benchmark.with_suffix("").name)
+        query_type = "_".join(benchmark.stem.split("_")[:-1])
+        library = benchmark.stem.split("_")[-1]
 
         start = time.time()
         benchmark_function(file_path)
         end = time.time()
         seconds = round(end - start, 2)
-        print(func_name, seconds)
+        print(benchmark.stem, seconds)
 
         output = [seconds, query_type, library]
         outputs.append(output)
 
-    # Pass file type to visualize_output for naming the output file
     visualize_output(outputs, args.file_type)
 
 
