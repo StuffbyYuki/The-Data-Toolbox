@@ -22,29 +22,11 @@ duckdb_vs_polars_vs_fireducks/
 ## Data
 The benchmark uses the [NYC Yellow Taxi Trip Data](https://data.cityofnewyork.us/Transportation/2021-Yellow-Taxi-Trip-Data/m6nq-qud6/about_data) that contains 30M rows with 18 columns. 
 
-1. Download the CSV file and place it in the `data` directory:
-   - `data/2023_Yellow_Taxi_Trip_Data.csv` (required, default format)
+Place your data file(s) in the `data` directory:
+- Required: `data/2023_Yellow_Taxi_Trip_Data.csv`
+- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (if you want to test Parquet format)
 
-2. (Optional) To run benchmarks with Parquet format, you'll need to convert the CSV file to Parquet. You can do this using Python with either Polars or DuckDB:
-
-   Using Polars:
-   ```python
-   import polars as pl
-   pl.read_csv("data/2023_Yellow_Taxi_Trip_Data.csv").write_parquet(
-       "data/2023_Yellow_Taxi_Trip_Data.parquet"
-   )
-   ```
-
-   Or using DuckDB:
-   ```python
-   import duckdb
-   duckdb.sql("""
-       COPY (SELECT * FROM read_csv('data/2023_Yellow_Taxi_Trip_Data.csv'))
-       TO 'data/2023_Yellow_Taxi_Trip_Data.parquet' (FORMAT PARQUET)
-   """)
-   ```
-
-The benchmark runs with CSV format by default. Use the `--file-type parquet` flag to run with Parquet format if you've created the Parquet file.
+The benchmark uses CSV format by default. To run with Parquet format, use the `--file-type parquet` flag.
 
 ## Running the Benchmarks
 
@@ -58,10 +40,10 @@ This benchmark is designed to run in a Docker environment to ensure consistent r
 4. Once inside the container:
    ```bash
    # Run with CSV file (default)
-   python -m duckdb_vs_polars_vs_fireducks
+   uv run python -m duckdb_vs_polars_vs_fireducks
 
    # Or run with Parquet file (if you've created it)
-   python -m duckdb_vs_polars_vs_fireducks --file-type parquet
+   uv run python -m duckdb_vs_polars_vs_fireducks --file-type parquet
    ```
 
 ### Using Docker Compose
@@ -97,6 +79,8 @@ Results are saved as PNG files in the project directory, showing execution times
 - While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
 - Polars uses `.collect()` to materialize results.
 - Fireducks uses `._evaluate()` to ensure query execution.
+- All libraries were tested with their default settings and no manual optimizations
+- The goal was to compare "out of the box" performance with straightforward query implementations
 
 For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 
