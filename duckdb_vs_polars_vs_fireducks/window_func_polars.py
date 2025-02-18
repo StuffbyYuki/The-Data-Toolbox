@@ -5,7 +5,6 @@ from config import DATA_FILE_PATH_STR, POLARS_DTYPES
 def window_func_polars(file_path):
     lf = pl.scan_csv(file_path, schema=POLARS_DTYPES)
     return lf.select(
-        avg_fare_per_vendor=pl.col("fare_amount").mean().over("VendorID"),
         ttl_amt_rank_per_pay_type=pl.col("total_amount")
         .rank(method="dense", descending=True)
         .over("payment_type"),

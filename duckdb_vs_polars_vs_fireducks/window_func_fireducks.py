@@ -8,9 +8,6 @@ def window_func_fireducks(file_path):
     )
     return pd.DataFrame(
         {
-            "avg_fare_per_vendor": df.groupby("VendorID")["fare_amount"].transform(
-                "mean"
-            ),
             "ttl_amt_rank_per_pay_type": df.groupby("payment_type")[
                 "total_amount"
             ].rank(method="dense", ascending=False),
