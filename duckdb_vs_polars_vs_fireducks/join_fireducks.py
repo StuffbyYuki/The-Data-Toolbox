@@ -1,8 +1,8 @@
-import pandas as pd
+import fireducks.pandas as pd
 from config import DATA_FILE_PATH_STR
 
 
-def join_pandas(file_path):
+def join_fireducks(file_path):
     df = pd.read_csv(file_path, engine="pyarrow", dtype_backend="pyarrow")
     df["pickup_month"] = pd.to_datetime(
         df["tpep_pickup_datetime"], format="%m/%d/%Y %I:%M:%S %p"
@@ -21,4 +21,4 @@ def join_pandas(file_path):
 
 
 if __name__ == "__main__":
-    print(join_pandas(DATA_FILE_PATH_STR))
+    print(join_fireducks(DATA_FILE_PATH_STR)) 

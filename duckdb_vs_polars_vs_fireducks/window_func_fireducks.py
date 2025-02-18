@@ -1,8 +1,8 @@
-import pandas as pd
+import fireducks.pandas as pd
 from config import DATA_FILE_PATH_STR, PANDAS_DTYPES
 
 
-def window_func_pandas(file_path):
+def window_func_fireducks(file_path):
     df = pd.read_csv(
         file_path, engine="pyarrow", dtype_backend="pyarrow", dtype=PANDAS_DTYPES
     )
@@ -19,4 +19,4 @@ def window_func_pandas(file_path):
 
 
 if __name__ == "__main__":
-    print(window_func_pandas(DATA_FILE_PATH_STR))
+    print(window_func_fireducks(DATA_FILE_PATH_STR)) 

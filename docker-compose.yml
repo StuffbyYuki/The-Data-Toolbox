@@ -5,4 +5,4 @@ services:
       - ./data:/app/data
     environment:
       - PYTHONUNBUFFERED=1
-    platform: linux/arm64
+    platform: linux/manylinux_2_14_x86_64
