@@ -5,3 +5,4 @@ services:
       - ./data:/app/data
     environment:
       - PYTHONUNBUFFERED=1
+    platform: linux/amd64
