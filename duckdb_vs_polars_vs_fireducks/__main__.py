@@ -2,6 +2,7 @@ import importlib
 import pathlib
 import time
 import argparse
+import gc
 from visualize_output import visualize_output
 from config import get_data_file_path_str
 
@@ -45,6 +46,8 @@ def main():
 
         output = [seconds, query_type, library]
         outputs.append(output)
+
+        gc.collect()
 
     visualize_output(outputs, args.file_type)
 
