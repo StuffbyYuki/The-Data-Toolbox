@@ -1,3 +1,7 @@
 env
 __py*
-data
+# Ignore all files in data directory
+data/*
+
+# But keep the .gitkeep file
+!data/.gitkeep
