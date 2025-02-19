@@ -15,7 +15,7 @@ duckdb_vs_polars_vs_fireducks/
     ├── __init__.py
     ├── agg_*.py         # Simple aggregation queries
     ├── groupby_agg_*.py # GroupBy aggregation queries
-    ├── join_*.py        # Self-join queries
+    ├── join_*.py        # Join queries
     └── window_func_*.py # Window function queries
 tests/
 ├── __init__.py
@@ -39,7 +39,7 @@ Place your data file(s) in the `data` directory:
 
 1. **Simple Aggregation**: Basic aggregations (sum, mean, min, max) on the `total_amount` column
 2. **GroupBy Aggregation**: Aggregations (sum, mean, min, max) of `total_amount` grouped by `VendorID` and `payment_type`
-3. **Self-Join**: Join the original table with aggregated `total_amount` sums (grouped by `VendorID`, `payment_type`, and pickup month)
+3. **Join**: Join the original table with aggregated `total_amount` sums (grouped by `VendorID`, `payment_type`, and pickup month)
 4. **Window Functions**: Two window calculations:
    - Average `fare_amount` per `VendorID`
    - Dense rank of trips by `total_amount` within each `payment_type` partition
