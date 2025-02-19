@@ -10,3 +10,8 @@ services:
       - PYTHONUNBUFFERED=1
       - FILE_TYPE=${FILE_TYPE:-csv}
     platform: linux/amd64
+    deploy:
+      resources:
+        limits:
+          memory: 64g
+          cpus: 10
