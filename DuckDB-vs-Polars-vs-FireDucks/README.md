@@ -105,10 +105,9 @@ Results show execution times in seconds for each operation across the different 
 ## Notes
 
 - Benchmarking DuckDB queries uses `.arrow()` to materialize results, as it was the fastest among `.arrow()`, `.pl()`, `.df()`, and `.fetchall()`.
-- While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
+    - While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
+    - For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 - Polars uses `.collect()` to materialize results.
 - Fireducks uses `._evaluate()` to ensure query execution.
 - All libraries were tested with their default settings and no manual optimizations
 - The goal was to compare "out of the box" performance with straightforward query implementations
-
-For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
