@@ -8,10 +8,10 @@ def groupby_agg_duckdb(file_path):
         select 
             VendorID,
             payment_type,
-            sum(total_amount),
-            avg(total_amount),
-            min(total_amount),
-            max(total_amount)
+            sum(total_amount) sum,
+            avg(total_amount) avg,
+            min(total_amount) min,
+            max(total_amount) max
         from {read_data_duckdb(file_path)}
         group by
             VendorID,

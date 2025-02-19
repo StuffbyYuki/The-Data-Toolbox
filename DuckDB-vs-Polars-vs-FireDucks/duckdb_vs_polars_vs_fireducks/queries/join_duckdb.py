@@ -22,7 +22,7 @@ def join_duckdb(file_path):
                 VendorID,
                 payment_type,
                 pickup_month,
-                sum(total_amount)
+                sum(total_amount) sum
             from base
             group by
                 VendorID,
