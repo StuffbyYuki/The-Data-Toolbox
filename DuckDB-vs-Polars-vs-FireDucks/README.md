@@ -1,6 +1,6 @@
-# DuckDB vs Polars vs Fireducks Benchmark
+# DuckDB vs Polars vs FireDucks Benchmark
 
-A benchmark comparing DuckDB, Polars, and Fireducks for simple data operations.
+A benchmark comparing DuckDB, Polars, and FireDucks for simple data operations.
 
 ## Project Structure
 
@@ -33,7 +33,7 @@ Place your data file(s) in the `data` directory:
 
 - **DuckDB**: A high-performance analytical database
 - **Polars**: Fast DataFrame library written in Rust
-- **Fireducks**: A faster, drop-in replacement for pandas
+- **FireDucks**: A faster, drop-in replacement for pandas
 
 ## Benchmark Queries
 
@@ -104,10 +104,11 @@ Results show execution times in seconds for each operation across the different 
 
 ## Notes
 
+- The benchmark evaluates in-memory execution and does not test streaming or out-of-RAM processing.
 - Benchmarking DuckDB queries uses `.arrow()` to materialize results, as it was the fastest among `.arrow()`, `.pl()`, `.df()`, and `.fetchall()`.
     - While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
     - For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 - Polars uses `.collect()` to materialize results.
-- Fireducks uses `._evaluate()` to ensure query execution.
-- All libraries were tested with their default settings and no manual optimizations
-- The goal was to compare "out of the box" performance with straightforward query implementations
+- FireDucks uses `._evaluate()` to ensure query execution.
+- All libraries were tested with their default settings and no manual optimizations.
+- The goal was to compare "out of the box" performance with straightforward query implementations.
