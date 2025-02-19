@@ -1,6 +1,10 @@
 import polars as pl
 import fireducks.pandas as pd
-from config import DUCKDB_DTYPES, POLARS_DTYPES, PANDAS_DTYPES
+from duckdb_vs_polars_vs_fireducks.config import (
+    DUCKDB_DTYPES,
+    POLARS_DTYPES,
+    PANDAS_DTYPES,
+)
 
 
 def read_data_duckdb(file_path):

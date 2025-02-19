@@ -7,7 +7,7 @@ def window_func_duckdb(file_path):
     query = f"""
         select 
             avg(fare_amount) over(partition by VendorID) avg_fare_per_vendor,
-            dense_rank() over(partition by payment_type order by total_amount desc) 
+            dense_rank() over(partition by payment_type order by total_amount desc) ttl_amt_rank_per_pay_type
         from {read_data_duckdb(file_path)}
         ;
     """
