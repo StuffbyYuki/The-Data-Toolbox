@@ -11,6 +11,9 @@ duckdb_vs_polars_vs_fireducks/
 ├── config.py
 ├── utils.py
 ├── visualize_output.py
+├── data/                # Data directory
+│   ├── 2023_Yellow_Taxi_Trip_Data.csv     # Required CSV file (3.78 GB)
+│   └── 2023_Yellow_Taxi_Trip_Data.parquet # Optional Parquet file (729 MB)
 └── queries/
     ├── __init__.py
     ├── agg_*.py         # Simple aggregation queries
@@ -28,6 +31,8 @@ The benchmark uses the [2023 NYC Yellow Taxi Trip Data](https://data.cityofnewyo
 Place your data file(s) in the `data` directory:
 - Required: `data/2023_Yellow_Taxi_Trip_Data.csv` (3.78 GB)
 - Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (729 MB) - if you want to test Parquet format
+
+Note: The `data` directory is included in the repository but the data files are gitignored. You'll need to download and place the files manually.
 
 ## Libraries Compared
 
