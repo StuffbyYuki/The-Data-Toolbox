@@ -1,6 +1,6 @@
 # DuckDB vs Polars vs Fireducks Benchmark
 
-A benchmark comparing DuckDB, Polars, and Fireducks (a fork of pandas) for common data operations.
+A benchmark comparing DuckDB, Polars, and Fireducks for simple data operations.
 
 ## Project Structure
 
@@ -45,6 +45,9 @@ Place your data file(s) in the `data` directory:
    - Dense rank of trips by `total_amount` within each `payment_type` partition
 
 ## Running the Benchmarks
+
+- FireDucks requires the use of [Linux (manylinux) on the x86_64 architecture](https://fireducks-dev.github.io/docs/get-started/)
+- Using docker is recommended as it ensures consistent results across different systems.
 
 ### Using Docker Compose
 
