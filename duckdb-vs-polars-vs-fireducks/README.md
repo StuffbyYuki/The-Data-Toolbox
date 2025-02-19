@@ -12,6 +12,7 @@ duckdb_vs_polars_vs_fireducks/
 ├── utils.py
 ├── visualize_output.py
 ├── data/                # Data directory
+│   ├── .gitkeep        # Ensures data directory exists in git
 │   ├── 2023_Yellow_Taxi_Trip_Data.csv     # Required CSV file (3.78 GB)
 │   └── 2023_Yellow_Taxi_Trip_Data.parquet # Optional Parquet file (729 MB)
 └── queries/
