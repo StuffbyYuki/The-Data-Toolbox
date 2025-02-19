@@ -17,6 +17,9 @@ duckdb_vs_polars_vs_fireducks/
     ├── groupby_agg_*.py # GroupBy aggregation queries
     ├── join_*.py        # Self-join queries
     └── window_func_*.py # Window function queries
+tests/
+├── __init__.py
+└── test_output.py      # Tests for all query implementations
 ```
 
 ## Data
@@ -26,11 +29,50 @@ Place your data file(s) in the `data` directory:
 - Required: `data/2023_Yellow_Taxi_Trip_Data.csv`
 - Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (if you want to test Parquet format)
 
+## Libraries Compared
+
+- **DuckDB**: A high-performance analytical database
+- **Polars**: Fast DataFrame library written in Rust
+- **Fireducks**: A faster, drop-in replacement for pandas
+
+## Benchmark Queries
+
+1. **Simple Aggregation**: Basic aggregations (sum, mean, min, max) on the `total_amount` column
+2. **GroupBy Aggregation**: Aggregations (sum, mean, min, max) of `total_amount` grouped by `VendorID` and `payment_type`
+3. **Self-Join**: Join the original table with aggregated `total_amount` sums (grouped by `VendorID`, `payment_type`, and pickup month)
+4. **Window Functions**: Two window calculations:
+   - Average `fare_amount` per `VendorID`
+   - Dense rank of trips by `total_amount` within each `payment_type` partition
+
 ## Running the Benchmarks
 
-This benchmark is designed to run in a Docker environment to ensure consistent results across different systems.
+### Using Docker Compose
 
-### Using Dev Container (Recommended)
+```bash
+# Run with CSV file (default)
+docker compose up
+
+# Run with Parquet file
+FILE_TYPE=parquet docker compose up
+
+# Run tests
+docker compose run app uv run pytest
+```
+
+You can adjust the container's resource allocation in the `docker-compose.yml` file:
+
+```yaml
+services:
+  app:
+    // ... existing config ...
+    deploy:
+      resources:
+        limits:
+          cpus: '4'    # Limit to 4 CPU cores
+          memory: 8G   # Limit to 8GB RAM
+```
+
+### Using Dev Container
 
 1. Open the project in VS Code
 2. Install the "Dev Containers" extension
@@ -47,28 +89,6 @@ This benchmark is designed to run in a Docker environment to ensure consistent r
    uv run pytest
    ```
 
-### Using Docker Compose
-
-```bash
-# Run with CSV file (default)
-docker compose up
-
-# Run with Parquet file
-FILE_TYPE=parquet docker compose up
-
-# Run tests
-docker compose run app uv run pytest
-```
-
-## Benchmark Queries
-
-1. **Simple Aggregation**: Basic aggregations (sum, mean, min, max) on the `total_amount` column
-2. **GroupBy Aggregation**: Aggregations (sum, mean, min, max) of `total_amount` grouped by `VendorID` and `payment_type`
-3. **Self-Join**: Join the original table with aggregated `total_amount` sums (grouped by `VendorID`, `payment_type`, and pickup month)
-4. **Window Functions**: Two window calculations:
-   - Average `fare_amount` per `VendorID`
-   - Dense rank of trips by `total_amount` within each `payment_type` partition
-
 ## Results
 
 Results show execution times in seconds for each operation across the different libraries.
@@ -78,13 +98,6 @@ Results show execution times in seconds for each operation across the different 
 
 ### Parquet Results
 ![Parquet Benchmark Results](./output_parquet.png)
-
-
-## Libraries Compared
-
-- **DuckDB**: A high-performance analytical database
-- **Polars**: Fast DataFrame library written in Rust
-- **Fireducks**: A faster, drop-in replacement for pandas
 
 ## Notes/Limitations
 
@@ -96,20 +109,3 @@ Results show execution times in seconds for each operation across the different 
 - The goal was to compare "out of the box" performance with straightforward query implementations
 
 For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
-
-## Testing
-
-The project includes unit tests to verify the correctness of query implementations across all three libraries. To run the tests:
-
-```bash
-# In dev container or local environment
-uv run pytest
-
-# Or using Docker
-docker compose run app uv run pytest
-```
-
-The tests verify that:
-- Each query returns the expected data structure
-- Results are consistent across all three libraries
-- Edge cases are handled properly
