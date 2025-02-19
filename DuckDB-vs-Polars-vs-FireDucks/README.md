@@ -44,6 +44,9 @@ This benchmark is designed to run in a Docker environment to ensure consistent r
 
    # Or run with Parquet file (if you've created it)
    uv run python -m duckdb_vs_polars_vs_fireducks --file-type parquet
+
+   # Run tests
+   uv run pytest
    ```
 
 ### Using Docker Compose
@@ -54,6 +57,9 @@ docker compose up
 
 # Run with Parquet file
 FILE_TYPE=parquet docker compose up
+
+# Run tests
+docker compose run app uv run pytest
 ```
 
 ## Benchmark Types
@@ -86,3 +92,20 @@ For more details on DuckDB materialization, see [this Discord discussion](https:
 
 ## Future Plans for This Benchmark
 Although, I don't have solid plans on how I want this repo to be, I plan on periodically run this benchmark as tools improve and get updates quickly. And potentially adding more queries to the benchmark down the road. 
+
+## Testing
+
+The project includes unit tests to verify the correctness of query implementations across all three libraries. To run the tests:
+
+```bash
+# In dev container or local environment
+uv run pytest
+
+# Or using Docker
+docker compose run app uv run pytest
+```
+
+The tests verify that:
+- Each query returns the expected data structure
+- Results are consistent across all three libraries
+- Edge cases are handled properly
