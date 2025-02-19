@@ -14,7 +14,7 @@ COPY pyproject.toml /app/
 # Install dependencies
 RUN uv sync
 
-# Copy only the necessary files for dependency installation first
+# Copy the rest of the application
 COPY . /app
 
 # Set PYTHONPATH to include current directory
