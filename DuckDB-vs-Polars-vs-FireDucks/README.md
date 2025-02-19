@@ -1,6 +1,6 @@
 # DuckDB vs Polars vs Fireducks Benchmark
 
-A benchmark comparing DuckDB, Polars, and Fireducks (a fork of pandas) for common data operations.
+A benchmark comparing DuckDB, Polars, and Fireducks for simple data operations.
 
 ## Project Structure
 
@@ -26,8 +26,8 @@ tests/
 The benchmark uses the [NYC Yellow Taxi Trip Data](https://data.cityofnewyork.us/Transportation/2021-Yellow-Taxi-Trip-Data/m6nq-qud6/about_data) that contains 30M rows with 18 columns. 
 
 Place your data file(s) in the `data` directory:
-- Required: `data/2023_Yellow_Taxi_Trip_Data.csv`
-- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (if you want to test Parquet format)
+- Required: `data/2023_Yellow_Taxi_Trip_Data.csv` (3.78 GB)
+- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (729 MB) - if you want to test Parquet format
 
 ## Libraries Compared
 
@@ -45,6 +45,9 @@ Place your data file(s) in the `data` directory:
    - Dense rank of trips by `total_amount` within each `payment_type` partition
 
 ## Running the Benchmarks
+
+- FireDucks requires the use of [Linux (manylinux) on the x86_64 architecture](https://fireducks-dev.github.io/docs/get-started/)
+- Using docker is recommended as it ensures consistent results across different systems.
 
 ### Using Docker Compose
 
@@ -99,7 +102,7 @@ Results show execution times in seconds for each operation across the different 
 ### Parquet Results
 ![Parquet Benchmark Results](./output_parquet.png)
 
-## Notes/Limitations
+## Notes
 
 - Benchmarking DuckDB queries uses `.arrow()` to materialize results, as it was the fastest among `.arrow()`, `.pl()`, `.df()`, and `.fetchall()`.
 - While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
