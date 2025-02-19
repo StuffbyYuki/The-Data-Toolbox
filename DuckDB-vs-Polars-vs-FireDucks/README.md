@@ -38,10 +38,10 @@ This benchmark is designed to run in a Docker environment to ensure consistent r
 4. Once inside the container:
    ```bash
    # Run with CSV file (default)
-   uv run python -m duckdb_vs_polars_vs_fireducks
+   uv run python duckdb_vs_polars_vs_fireducks
 
    # Or run with Parquet file (if you've created it)
-   uv run python -m duckdb_vs_polars_vs_fireducks --file-type parquet
+   uv run python duckdb_vs_polars_vs_fireducks --file-type parquet
 
    # Run tests
    uv run pytest
