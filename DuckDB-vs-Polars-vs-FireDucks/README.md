@@ -26,8 +26,8 @@ tests/
 The benchmark uses the [NYC Yellow Taxi Trip Data](https://data.cityofnewyork.us/Transportation/2021-Yellow-Taxi-Trip-Data/m6nq-qud6/about_data) that contains 30M rows with 18 columns. 
 
 Place your data file(s) in the `data` directory:
-- Required: `data/2023_Yellow_Taxi_Trip_Data.csv`
-- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (if you want to test Parquet format)
+- Required: `data/2023_Yellow_Taxi_Trip_Data.csv` (3.78 GB)
+- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (729 MB) - if you want to test Parquet format
 
 ## Libraries Compared
 
