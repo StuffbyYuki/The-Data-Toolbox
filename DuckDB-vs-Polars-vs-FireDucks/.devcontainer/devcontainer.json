@@ -1,0 +1,21 @@
+{
+    "name": "DuckDB vs Polars vs FireDucks",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/python/cp312-cp312/bin/python"
+            }
+        }
+    },
+    "forwardPorts": [],
+    "updateContentCommand": "uv sync",
+    "postCreateCommand": "uv sync",
+    "remoteUser": "root"
+} 
