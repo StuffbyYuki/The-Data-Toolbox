@@ -102,7 +102,7 @@ Results show execution times in seconds for each operation across the different 
 ### Parquet Results
 ![Parquet Benchmark Results](./output_parquet.png)
 
-## Notes/Limitations
+## Notes
 
 - Benchmarking DuckDB queries uses `.arrow()` to materialize results, as it was the fastest among `.arrow()`, `.pl()`, `.df()`, and `.fetchall()`.
 - While `.execute()` could be used, it might not properly reflect full execution time as the final pipeline won't execute until a result collecting method is called.
