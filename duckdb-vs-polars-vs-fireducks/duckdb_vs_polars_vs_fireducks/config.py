@@ -23,16 +23,16 @@ def get_data_file_path_str(file_type: str) -> str:
 
 # Schema definitions for CSV files
 PANDAS_DTYPES = {
-    "VendorID": "Int64",
+    "VendorID": "int64",
     "tpep_pickup_datetime": "string",
     "tpep_dropoff_datetime": "string",
-    "passenger_count": "Int64",
+    "passenger_count": "int64",
     "trip_distance": "float64",
-    "RatecodeID": "Int64",
+    "RatecodeID": "int64",
     "store_and_fwd_flag": "string",
-    "PULocationID": "Int64",
-    "DOLocationID": "Int64",
-    "payment_type": "Int64",
+    "PULocationID": "int64",
+    "DOLocationID": "int64",
+    "payment_type": "int64",
     "fare_amount": "float64",
     "extra": "float64",
     "mta_tax": "float64",
