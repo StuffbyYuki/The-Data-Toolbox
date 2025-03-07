@@ -1,6 +1,6 @@
 import importlib
 import pathlib
-import time
+import timeit
 import argparse
 import gc
 from visualize_output import visualize_output
@@ -38,19 +38,19 @@ def main():
         query_type = "_".join(benchmark.stem.split("_")[:-1])
         library = benchmark.stem.split("_")[-1]
 
-        start = time.time()
-        benchmark_function(file_path)
-        end = time.time()
-        seconds = round(end - start, 2)
-        print(benchmark.stem, seconds)
+        # Use timeit to measure the average execution time
+        total_time = timeit.repeat(
+            stmt=lambda: benchmark_function(file_path),
+            repeat=3,
+            number=1
+        )
+        average_time = round(sum(total_time) / len(total_time), 2)
+        print(benchmark.stem, average_time)
 
-        output = [seconds, query_type, library]
+        output = [average_time, query_type, library]
         outputs.append(output)
 
-        gc.collect()
-
     visualize_output(outputs, args.file_type)
-
 
 if __name__ == "__main__":
     main()
