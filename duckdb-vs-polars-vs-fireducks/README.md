@@ -116,5 +116,6 @@ Results show execution times in seconds for each operation across the different 
     - For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 - Polars uses `.collect()` to materialize results.
 - FireDucks uses `._evaluate()` to ensure query execution.
+- The benchmark uses the newest versions of each library as of 03/07/2025, except for Polars, which uses `polars-lts-cpu` at version `1.22.0`. This is likely due to using the `manylinux` image on an Apple ARM machine. 
 - All libraries were tested with their default settings and no manual optimizations.
 - The goal was to compare "out of the box" performance with straightforward query implementations.
