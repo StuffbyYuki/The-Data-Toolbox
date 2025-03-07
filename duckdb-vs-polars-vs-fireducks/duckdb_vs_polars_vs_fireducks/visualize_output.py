@@ -22,6 +22,6 @@ def visualize_output(data, file_type):
         ax.bar_label(container)
 
     ax.set(xlabel="", ylabel="Time in Seconds")
-    plt.title(f"DuckDB vs Polars vs Fireducks - Speed Comparison ({file_type})")
+    plt.title(f"DuckDB vs Fireducks vs Polars - Speed Comparison ({file_type})")
     plt.savefig(f"output_{file_type}.png")
     plt.show()
