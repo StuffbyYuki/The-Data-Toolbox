@@ -100,7 +100,7 @@ services:
 
 ## Results
 
-Results show execution times in seconds for each operation across the different libraries. This was run on a EC2 instance with 64GB RAM and 16 vCPUs and 16GB of EBS volume (m6in.4xlarge).
+Results show execution times in seconds for each operation across the different libraries. This was run on a EC2 instance with 64GB RAM and 16 vCPUs and 16GB of EBS volume (m6i.4xlarge).
 
 
 ### CSV Results
