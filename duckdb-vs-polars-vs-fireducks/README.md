@@ -1,6 +1,6 @@
 # DuckDB vs Polars vs FireDucks Benchmark
 
-A benchmark comparing DuckDB, Polars, and FireDucks for simple data operations.
+A benchmark comparing DuckDB, Polars, and FireDucks for simple data operations. Check out the [blog post](https://open.substack.com/pub/thedatatoolbox/p/duckdb-vs-fireducks-vs-polars-which?r=1h2ayd&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true) for more details.
 
 ## Project Structure
 
@@ -100,7 +100,8 @@ services:
 
 ## Results
 
-Results show execution times in seconds for each operation across the different libraries.
+Results show execution times in seconds for each operation across the different libraries. This was run on a EC2 instance with 64GB RAM and 16 vCPUs and 16GB of EBS volume (m6in.4xlarge).
+
 
 ### CSV Results
 ![CSV Benchmark Results](./output_csv.png)
@@ -116,6 +117,6 @@ Results show execution times in seconds for each operation across the different 
     - For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 - Polars uses `.collect()` to materialize results.
 - FireDucks uses `._evaluate()` to ensure query execution.
-- The benchmark uses the newest versions of each library as of 03/07/2025, except for Polars, which uses `polars-lts-cpu` at version `1.22.0`. This is likely due to using the `manylinux` image on an Apple ARM machine. 
+- The benchmark uses the newest versions of each library as of 03/10/2025.
 - All libraries were tested with their default settings and no manual optimizations.
 - The goal was to compare "out of the box" performance with straightforward query implementations.
