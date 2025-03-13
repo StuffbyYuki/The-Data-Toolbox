@@ -1,5 +1,4 @@
 version = 1
-revision = 1
 requires-python = ">=3.12"
 
 [[package]]
@@ -119,7 +118,7 @@ requires-dist = [
     { name = "contourpy", specifier = ">=1.3.1" },
     { name = "cycler", specifier = ">=0.12.1" },
     { name = "duckdb", specifier = ">=1.2.1" },
-    { name = "fireducks", specifier = ">=1.2.4" },
+    { name = "fireducks", specifier = ">=1.2.5" },
     { name = "fonttools", specifier = ">=4.56.0" },
     { name = "iniconfig", specifier = ">=2.0.0" },
     { name = "kiwisolver", specifier = ">=1.4.8" },
@@ -142,7 +141,7 @@ requires-dist = [
 
 [[package]]
 name = "fireducks"
-version = "1.2.4"
+version = "1.2.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "firefw" },
@@ -150,18 +149,18 @@ dependencies = [
     { name = "pyarrow" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/1c/e9a2613ff595ac085c78a363abde2cb6e6261a599742134dea02d9639a9b/fireducks-1.2.4-cp312-cp312-manylinux_2_17_x86_64.whl", hash = "sha256:56fc6406da36db5b433e9ba27c43bf41e52ab0483e49c921a53eec9659961f1a", size = 7258803 },
-    { url = "https://files.pythonhosted.org/packages/e6/af/ef11afd748eae348ce32929c191c65a12be6d43f201bf7d6034024bc2403/fireducks-1.2.4-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:66cc77ad26fe9df123366ed9a70bc099d1773da9de97d3f3b04fb8a5bdc692b9", size = 7303287 },
-    { url = "https://files.pythonhosted.org/packages/9b/a6/547845950286de4c3217a3a8e4654fe750c4ccec05dd453f8b5f9238ed1c/fireducks-1.2.4-cp313-cp313-manylinux_2_17_x86_64.whl", hash = "sha256:cdaff26bdac64d0c3a00dd4c57eed0525e785e465a7aa6f3900aed1349b02277", size = 7258967 },
-    { url = "https://files.pythonhosted.org/packages/d5/e2/74eebb5758cce0d5498b6730546911067dda9e3892a5e7b37ef266333b6c/fireducks-1.2.4-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:cca5b19641564d21c498fdbeb1e970e7e60692410c40edf9745cd956a53854e8", size = 7302789 },
+    { url = "https://files.pythonhosted.org/packages/3a/91/b5b8154273c909bc258b756ec5c2fa5ef60dd43663615f02abfb42685de9/fireducks-1.2.5-cp312-cp312-manylinux_2_17_x86_64.whl", hash = "sha256:c7621165c40ffc73bd6051123e871272b64a25e4a7eed3918db9efddd30668fb", size = 7259441 },
+    { url = "https://files.pythonhosted.org/packages/fb/bd/dddeab359fff3a68e300fd4aa402667a99b914fab0719469adf78ab916cf/fireducks-1.2.5-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:6abce3276d7de29f573ccf3bc6818f6212207d14f850c5325d03baff3b6ab224", size = 7306013 },
+    { url = "https://files.pythonhosted.org/packages/a8/75/0086047583e822a65ccd718d068dfbddfb39bab2caecf96c9bdaf828fbbc/fireducks-1.2.5-cp313-cp313-manylinux_2_17_x86_64.whl", hash = "sha256:da2750b2880fbd4967a73b9193870dddff309aa88c22cfc874af7d886b31a9af", size = 7259659 },
+    { url = "https://files.pythonhosted.org/packages/e9/ed/6142dac73bc223029c745c66633340baf5266d935e2e0894a5124f66655e/fireducks-1.2.5-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:f7091ab3f87de271fb54e1dac38ff518e572e91f3830827d400b57677de4f88a", size = 7305558 },
 ]
 
 [[package]]
 name = "firefw"
-version = "1.2.4"
+version = "1.2.5"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fe/2e/28908a72f295812f0538e33a2d4c2db59dc075e17c80b71baf41e1943e80/firefw-1.2.4-py3-none-any.whl", hash = "sha256:a81fa9de32f176c1097c083d14bb0d60cbb5c041cbce309c387cc1776886cece", size = 12910 },
+    { url = "https://files.pythonhosted.org/packages/c0/be/f57d56531f51fb7b8523bbe7f52504a96f27d57cec399054221e6c92d60b/firefw-1.2.5-py3-none-any.whl", hash = "sha256:ba8133672d6ba79a297ccca32bd1b4bb03d39cb2c54fdfcd6db82486adea2e62", size = 12910 },
 ]
 
 [[package]]
