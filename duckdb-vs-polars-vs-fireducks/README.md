@@ -14,7 +14,7 @@ duckdb_vs_polars_vs_fireducks/
 ├── data/                # Data directory
 │   ├── .gitkeep        # Ensures data directory exists in git
 │   ├── 2023_Yellow_Taxi_Trip_Data.csv     # Required CSV file (3.78 GB)
-│   └── 2023_Yellow_Taxi_Trip_Data.parquet # Optional Parquet file (729 MB)
+│   └── 2023_Yellow_Taxi_Trip_Data.parquet # Optional Parquet file (773.4 MB)
 └── queries/
     ├── __init__.py
     ├── agg_*.py         # Simple aggregation queries
@@ -31,7 +31,7 @@ The benchmark uses the [2023 NYC Yellow Taxi Trip Data](https://data.cityofnewyo
 
 Place your data file(s) in the `data` directory:
 - Required: `data/2023_Yellow_Taxi_Trip_Data.csv` (3.78 GB)
-- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (729 MB) - if you want to test Parquet format
+- Optional: `data/2023_Yellow_Taxi_Trip_Data.parquet` (773.4 MB) - Only if you want to test Parquet format. You can also convert the CSV to Parquet using the `convert_csv_to_parquet.py` script.
 
 Note: The `data` directory is included in the repository but the data files are gitignored. You'll need to download and place the files manually.
 
@@ -117,6 +117,6 @@ Results show execution times in seconds for each operation across the different 
     - For more details on DuckDB materialization, see [this Discord discussion](https://discord.com/channels/909674491309850675/921100786098901042/1217841718066413648).
 - Polars uses `.collect()` to materialize results.
 - FireDucks uses `._evaluate()` to ensure query execution.
-- The benchmark uses the newest versions of each library as of 03/10/2025.
+- The benchmark uses the newest versions of each library as of 03/13/2025.
 - All libraries were tested with their default settings and no manual optimizations.
 - The goal was to compare "out of the box" performance with straightforward query implementations.
