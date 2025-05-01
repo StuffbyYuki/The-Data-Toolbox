@@ -53,7 +53,9 @@ dbt-semantic-interfaces==0.5.1
 deepdiff==7.0.1
     # via dbt-common
 duckdb==1.2.2
-    # via dbt-duckdb
+    # via
+    #   intro-to-bauplan (pyproject.toml)
+    #   dbt-duckdb
 func-timeout==4.3.5
     # via bauplan
 grpcio==1.71.0
@@ -156,6 +158,8 @@ rpds-py==0.24.0
     # via
     #   jsonschema
     #   referencing
+ruff==0.11.8
+    # via intro-to-bauplan (pyproject.toml)
 six==1.17.0
     # via
     #   isodate
