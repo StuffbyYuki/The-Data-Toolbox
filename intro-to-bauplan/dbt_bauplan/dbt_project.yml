@@ -31,8 +31,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   dbt_bauplan:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    staging:
       +materialized: view
+    marts:
+      +materialized: table
 
 seeds:
   dbt_bauplan:

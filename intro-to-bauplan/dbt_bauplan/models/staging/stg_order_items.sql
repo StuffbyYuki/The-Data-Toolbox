@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('ecom', 'raw_items') }}
+    select * from {{ ref('raw_items') }}
 
 ),
 
