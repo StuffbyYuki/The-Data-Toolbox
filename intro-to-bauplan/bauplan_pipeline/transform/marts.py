@@ -1,9 +1,5 @@
 import bauplan
 import duckdb
-from utils import cents_to_dollars
-from duckdb.typing import FLOAT, BIGINT
-
-duckdb.create_function("cents_to_dollars", cents_to_dollars, [BIGINT], FLOAT)
 
 
 @bauplan.model(materialization_strategy="REPLACE")
