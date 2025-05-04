@@ -23,8 +23,8 @@ def stg_customers(
     """
     sql = """
     SELECT
-        id as customer_id, 
-        name as customer_name
+        id AS customer_id, 
+        name AS customer_name
     FROM raw_customers
     """
 
@@ -44,11 +44,11 @@ def stg_order_items(
     description:
     """
     sql = """
-    select
-        id as order_item_id,
+    SELECT
+        id AS order_item_id,
         order_id,
-        sku as product_id
-    from raw_items
+        sku AS product_id
+    FROM raw_items
     """
 
     return duckdb.sql(sql).arrow()
@@ -74,19 +74,19 @@ def stg_orders(
     name:
     description:
     """
-    sql = f"""
-    select
-        id as order_id,
-        store_id as location_id,
-        customer as customer_id,
-        subtotal as subtotal_cents,
-        tax_paid as tax_paid_cents,
-        order_total as order_total_cents,
-        cents_to_dollars(subtotal) as subtotal,
-        cents_to_dollars(tax_paid) as tax_paid,
-        cents_to_dollars(order_total) as order_total,
-        date_trunc('day', ordered_at) as ordered_at
-    from raw_orders
+    sql = """
+    SELECT
+        id AS order_id,
+        store_id AS location_id,
+        customer AS customer_id,
+        subtotal AS subtotal_cents,
+        tax_paid AS tax_paid_cents,
+        order_total AS order_total_cents,
+        cents_to_dollars(subtotal) AS subtotal,
+        cents_to_dollars(tax_paid) AS tax_paid,
+        cents_to_dollars(order_total) AS order_total,
+        date_trunc('day', ordered_at) AS ordered_at
+    FROM raw_orders
     """
 
     return duckdb.sql(sql).arrow()
@@ -109,15 +109,14 @@ def stg_products(
         - product_description: The description of each product
         - product_price: The price of each product
     """
-
     sql = """
     SELECT
-        sku as product_id, 
-        name as product_name,
-        description as product_description,
-        cents_to_dollars(price) as product_price,
-        coalesce("type" = 'jaffle', false) as is_food_item,
-        coalesce("type" = 'beverage', false) as is_drink_item
+        sku AS product_id, 
+        name AS product_name,
+        description AS product_description,
+        cents_to_dollars(price) AS product_price,
+        coalesce("type" = 'jaffle', false) AS is_food_item,
+        coalesce("type" = 'beverage', false) AS is_drink_item
     FROM raw_products
     """
 
@@ -143,11 +142,11 @@ def stg_supplies(
     """
     sql = """
     SELECT
-        id as supply_id, 
-        sku as product_id,
-        name as supply_name,
-        cents_to_dollars(cost) as supply_cost,
-        perishable as is_perishable_supply
+        id AS supply_id, 
+        sku AS product_id,
+        name AS supply_name,
+        cents_to_dollars(cost) AS supply_cost,
+        perishable AS is_perishable_supply
     FROM raw_supplies
     """
 
