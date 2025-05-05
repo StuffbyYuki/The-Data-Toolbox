@@ -15,8 +15,8 @@ def stg_customers(
     ),
 ):
     """
-    name:
-    description:
+    name: stg_customers
+    description: Staging model for customer data that standardizes customer identifiers and names.
     columns:
         - customer_id: The unique key for each customer.
         - customer_name: The name of each customer
@@ -40,8 +40,12 @@ def stg_order_items(
     ),
 ):
     """
-    name:
-    description:
+    name: stg_order_items
+    description: Staging model for order items that links orders with products through SKUs.
+    columns:
+        - order_item_id: The unique identifier for each order item
+        - order_id: The order this item belongs to
+        - product_id: The product SKU associated with this order item
     """
     sql = """
     SELECT
@@ -71,8 +75,19 @@ def stg_orders(
     ),
 ):
     """
-    name:
-    description:
+    name: stg_orders
+    description: Staging model for orders that normalizes monetary values and timestamps.
+    columns:
+        - order_id: The unique identifier for each order
+        - location_id: The store where the order was placed
+        - customer_id: The customer who placed the order
+        - subtotal_cents: The order subtotal in dollars
+        - tax_paid_cents: The tax amount in dollars
+        - order_total_cents: The total order amount in dollars
+        - subtotal: The order subtotal in dollars
+        - tax_paid: The tax amount in dollars
+        - order_total: The total order amount in dollars
+        - ordered_at: The date when the order was placed
     """
     sql = """
     SELECT
@@ -101,13 +116,15 @@ def stg_products(
     ),
 ):
     """
-    name:
-    description:
+    name: stg_products
+    description: Staging model for products that normalizes prices and adds flags for product types.
     columns:
         - product_id: The unique key for each product.
         - product_name: The name of each product
         - product_description: The description of each product
-        - product_price: The price of each product
+        - product_price: The price in dollars
+        - is_food_item: Flag indicating if the product is a jaffle (food item)
+        - is_drink_item: Flag indicating if the product is a beverage
     """
     sql = """
     SELECT
@@ -132,12 +149,13 @@ def stg_supplies(
     ),
 ):
     """
-    name:
-    description:
+    name: stg_supplies
+    description: Staging model for supplies that normalizes costs.
     columns:
-        - supplier_id: The unique key for each supplier.
-        - supplier_name: The name of each supplier
-        - supplier_cost: The cost of each supplier
+        - supply_id: The unique key for each supplier.
+        - product_id: The product SKU associated with this supply
+        - supply_name: The name of each supplier
+        - supply_cost: The cost in dollars
         - is_perishable_supply: Whether the supplier is perishable
     """
     sql = """
