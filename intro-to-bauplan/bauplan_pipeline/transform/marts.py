@@ -31,9 +31,9 @@ def order_items(
         stg_products.is_drink_item,
         order_supplies_summary.supply_cost
     FROM stg_order_items
-    LEFT JOIN stg_orders 
+    LEFT JOIN stg_orders
         ON stg_order_items.order_id = stg_orders.order_id
-    LEFT JOIN stg_products 
+    LEFT JOIN stg_products
         ON stg_order_items.product_id = stg_products.product_id
     LEFT JOIN order_supplies_summary
         ON stg_order_items.product_id = order_supplies_summary.product_id

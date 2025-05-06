@@ -128,7 +128,7 @@ def stg_products(
     """
     sql = """
     SELECT
-        sku AS product_id, 
+        sku AS product_id,
         name AS product_name,
         description AS product_description,
         cents_to_dollars(price) AS product_price,
@@ -152,6 +152,7 @@ def stg_supplies(
     name: stg_supplies
     description: Staging model for supplies that normalizes costs.
     columns:
+        - supply_uuid: A unique identifier generated from id and sku
         - supply_id: The unique key for each supplier.
         - product_id: The product SKU associated with this supply
         - supply_name: The name of each supplier
@@ -160,6 +161,7 @@ def stg_supplies(
     """
     sql = """
     SELECT
+        md5(concat(id::varchar, sku::varchar)) as supply_uuid,
         id AS supply_id, 
         sku AS product_id,
         name AS supply_name,
