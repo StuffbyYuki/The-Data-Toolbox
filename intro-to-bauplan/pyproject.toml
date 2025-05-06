@@ -1,0 +1,12 @@
+[project]
+name = "intro-to-bauplan"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bauplan>=0.0.3a375",
+    "dbt-duckdb>=1.9.3",
+    "duckdb>=1.2.2",
+    "ruff>=0.11.8",
+]
