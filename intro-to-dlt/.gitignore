@@ -1,0 +1,6 @@
+.venv
+.env
+.ruff_cache
+.DS_Store
+data
+# secrets.toml
