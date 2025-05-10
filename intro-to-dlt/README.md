@@ -23,7 +23,26 @@ This pipeline:
    cd intro-to-dlt
    ```
 
-2. Create and activate a virtual environment
+2. Choose one of the following setup methods:
+
+   ### Option A: Using Dev Container (Recommended)
+   
+   This project includes a dev container configuration for a consistent development environment.
+   
+   **Prerequisites:**
+   - [VS Code](https://code.visualstudio.com/)
+   - [Docker](https://www.docker.com/products/docker-desktop)
+   - [Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+   
+   **Steps:**
+   1. Open this project in VS Code
+   2. When prompted, click "Reopen in Container" (or press F1 and select "Remote-Containers: Reopen in Container")
+   3. The container will build and configure the development environment automatically
+   4. Create a `.env` file with your environment variables: `cp .env.example .env`
+   
+   ### Option B: Manual Setup
+   
+   Create and activate a virtual environment
    ```
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
@@ -63,13 +82,16 @@ The extracted data will be stored in the `.dlt` directory in Parquet format.
 
 ```
 intro-to-dlt/
+├── .devcontainer/          # Development container configuration
+│   ├── devcontainer.json   # VS Code devcontainer settings
+│   └── Dockerfile          # Container definition
 ├── .dlt/                   # DLT configuration directory
 │   ├── config.toml         # DLT configuration settings
 │   └── secrets.toml        # Secure storage for credentials
 ├── .env                    # Environment variables file
+├── .env.example            # Example environment variables file
 ├── .gitignore              # Git ignore patterns
 ├── .python-version         # Python version specification for pyenv
-├── env.example             # Example environment variables file
 ├── pyproject.toml          # Python project configuration
 ├── README.md               # Project documentation
 ├── requirements.txt        # Python dependencies
