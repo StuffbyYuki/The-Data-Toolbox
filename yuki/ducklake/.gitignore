@@ -1,6 +1,0 @@
-.venv/
-.env
-data_files_duckdb_metastore/
-data_files_postgres_metastore/
-metadata.ducklake
-.DS_Store
