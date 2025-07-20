@@ -6,11 +6,11 @@ dotenv.load_dotenv(override=True)
 
 
 def main():
-    host = os.getenv('HOST', 'localhost')
-    port = os.getenv('PORT', '5432')
-    user = os.getenv('USER', 'ducklake_user')
-    password = os.getenv('PASSWORD', 'ducklake_password')
-    dbname = os.getenv('DBNAME', 'ducklake_catalog')
+    host = os.getenv('LOCAL_HOST', 'localhost')
+    port = os.getenv('LOCAL_PORT', '5432')
+    user = os.getenv('LOCAL_USER', 'ducklake_user')
+    password = os.getenv('LOCAL_PASSWORD', 'ducklake_password')
+    dbname = os.getenv('LOCAL_DBNAME', 'ducklake_catalog')
     
     duckdb.sql(f"""
         INSTALL ducklake;

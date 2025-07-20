@@ -47,11 +47,11 @@ services:
       - .:/app
     environment:
       - PYTHONPATH=/app
-      - HOST=postgres
-      - PORT=5432
-      - USER=ducklake_user
-      - PASSWORD=ducklake_password
-      - DBNAME=ducklake_catalog
+      - LOCAL_HOST=postgres
+      - LOCAL_PORT=5432
+      - LOCAL_USER=ducklake_user
+      - LOCAL_PASSWORD=ducklake_password
+      - LOCAL_DBNAME=ducklake_catalog
     depends_on:
       postgres:
         condition: service_healthy
@@ -76,11 +76,11 @@ services:
     environment:
       - PYTHONPATH=/app
       # PostgreSQL connection (can be local or remote)
-      - HOST=${POSTGRES_HOST:-postgres}
-      - PORT=${POSTGRES_PORT:-5432}
-      - USER=${POSTGRES_USER:-ducklake_user}
-      - PASSWORD=${POSTGRES_PASSWORD:-ducklake_password}
-      - DBNAME=${POSTGRES_DB:-ducklake_catalog}
+      - HOST=${HOST:-postgres}
+      - PORT=${PORT:-5432}
+      - USER=${USER:-ducklake_user}
+      - PASSWORD=${PASSWORD:-ducklake_password}
+      - DBNAME=${DBNAME:-ducklake_catalog}
       # R2 credentials
       - R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
       - R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}

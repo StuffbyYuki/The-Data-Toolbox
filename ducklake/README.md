@@ -50,6 +50,13 @@ R2_ACCESS_KEY_ID=your_key
 R2_SECRET_ACCESS_KEY=your_secret
 R2_ACCOUNT_ID=your_account
 R2_BUCKET_NAME=your_bucket
+
+# Local postgres' creds already defined
+LOCAL_HOST=postgres
+LOCAL_PORT=5432
+LOCAL_USER=ducklake_user
+LOCAL_PASSWORD=ducklake_password
+LOCAL_DBNAME=ducklake_catalog
 ```
 
 ## Scripts
