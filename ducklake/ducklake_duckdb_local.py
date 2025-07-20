@@ -4,10 +4,9 @@ def main():
     duckdb.sql("""
         INSTALL ducklake;
         LOAD ducklake;
-        ATTACH 'ducklake:metadata.ducklake' AS my_ducklake;
+        ATTACH 'ducklake:metadata.ducklake' AS my_ducklake (DATA_PATH 'ducklake_data_duckdb_local/');
         USE my_ducklake;
         CREATE or REPLACE TABLE my_table AS SELECT 1 AS my_number;
-        SELECT * FROM my_table;         
     """)
     print(
         duckdb.sql("SELECT * FROM my_table;"),
