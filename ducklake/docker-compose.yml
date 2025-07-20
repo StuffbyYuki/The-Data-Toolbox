@@ -19,9 +19,29 @@ services:
     networks:
       - ducklake-network
 
-  python-app:
+  python-duckdb-local-app:
     image: python:3.11-slim
-    container_name: ducklake-python
+    container_name: ducklake-duckdb-local-python
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+    command: >
+      sh -c "
+        pip install uv &&
+        uv add duckdb &&
+        uv run python ducklake_duckdb_local.py &&
+        echo 'DuckDB metastore script completed successfully' &&
+        exit 0
+      "
+    restart: "no"
+    networks:
+      - ducklake-network
+
+  python-postgres-local-app:
+    image: python:3.11-slim
+    container_name: ducklake-postgres-local-python
     working_dir: /app
     volumes:
       - .:/app
@@ -39,17 +59,17 @@ services:
       sh -c "
         pip install uv &&
         uv add duckdb python-dotenv &&
-        uv run python ducklake_local.py &&
-        echo 'Script completed successfully' &&
+        uv run python ducklake_postgres_local.py &&
+        echo 'PostgreSQL metastore script completed successfully' &&
         exit 0
       "
     restart: "no"
     networks:
       - ducklake-network
 
-  python-r2-app:
+  python-r2-neon-app:
     image: python:3.11-slim
-    container_name: ducklake-r2-python
+    container_name: ducklake-r2-neon-python
     working_dir: /app
     volumes:
       - .:/app
@@ -74,7 +94,7 @@ services:
         pip install uv &&
         uv add duckdb python-dotenv &&
         uv run python ducklake_r2_neon.py &&
-        echo 'R2 script completed successfully' &&
+        echo 'R2 cloud storage script completed successfully' &&
         exit 0
       "
     restart: "no"
