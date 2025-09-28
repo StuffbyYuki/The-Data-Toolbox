@@ -1,0 +1,6 @@
+.venv
+.ruff_cache
+.cache
+__pycache__
+logs
+.DS_Store

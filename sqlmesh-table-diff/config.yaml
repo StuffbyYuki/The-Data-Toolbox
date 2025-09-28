@@ -1,0 +1,62 @@
+# --- Gateway Connection ---
+gateways:
+  duckdb:
+    connection:
+      # For more information on configuring the connection to your execution engine, visit:
+      # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connection
+      # https://sqlmesh.readthedocs.io/en/stable/integrations/engines/duckdb/#connection-options
+      type: duckdb
+      database: db.db
+      # concurrent_tasks: 1
+      # register_comments: True
+      # pre_ping: False
+      # pretty_sql: False
+      # schema_differ_overrides: 
+      # catalog_type_overrides: 
+      # catalogs: 
+      # extensions: 
+      # connector_config: 
+      # secrets: 
+      # filesystems: 
+      # token: 
+
+default_gateway: duckdb
+
+# --- Model Defaults ---
+# https://sqlmesh.readthedocs.io/en/stable/reference/model_configuration/#model-defaults
+
+model_defaults:
+  dialect: duckdb
+  start: 2025-09-27 # Start date for backfill history
+  cron: '@daily'    # Run models daily at 12am UTC (can override per model)
+
+# --- Linting Rules ---
+# Enforce standards for your team
+# https://sqlmesh.readthedocs.io/en/stable/guides/linter/
+
+linter:
+  enabled: true
+  rules:
+    - ambiguousorinvalidcolumn
+    - invalidselectstarexpansion
+    - noambiguousprojections
+
+# FLOW: Minimal prompts, automatic changes, summary output
+# https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#plan
+
+plan:
+  no_diff: true             # Hide detailed text differences for changed models
+  no_prompts: true          # No interactive prompts
+  auto_apply: true          # Apply changes automatically
+
+# --- Optional: Set a default target environment ---
+# This is intended for local development to prevent users from accidentally applying plans to the prod environment.
+# It is a development only config and should NOT be committed to your git repo.
+# https://sqlmesh.readthedocs.io/en/stable/guides/configuration/#default-target-environment
+
+# Uncomment the following line to use a default target environment derived from the logged in user's name.
+# default_target_environment: dev_{{ user() }}
+
+# Example usage:
+# sqlmesh plan            # Automatically resolves to: sqlmesh plan dev_yourname
+# sqlmesh plan prod       # Specify `prod` to apply changes to production
