@@ -8,7 +8,8 @@ MODEL (
 
 SELECT
   item_id,
-  COUNT(DISTINCT id) AS num_orders,
+  COUNT(DISTINCT id) * 2 AS num_orders,
+  1 as new_col_one
 FROM
   sqlmesh_example.incremental_model
 GROUP BY item_id
