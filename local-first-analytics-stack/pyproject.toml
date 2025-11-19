@@ -1,0 +1,10 @@
+[project]
+name = "local-first-analytics-stack"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "dlt[filesystem]>=1.12.1",
+    "sqlmesh>=0.227.1",
+]
