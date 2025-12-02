@@ -3,8 +3,9 @@ name = "local-first-analytics-stack"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 dependencies = [
-    "dlt[filesystem]>=1.12.1",
+    "dlt[ducklake]>=1.12.1",
+    "python-dotenv>=1.2.1",
     "sqlmesh>=0.227.1",
 ]
