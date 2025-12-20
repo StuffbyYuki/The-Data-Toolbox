@@ -1,24 +1,38 @@
-# --- Gateway Connection ---
 gateways:
   duckdb:
     connection:
-      # For more information on configuring the connection to your execution engine, visit:
-      # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connection
-      # https://sqlmesh.readthedocs.io/en/stable/integrations/engines/duckdb/#connection-options
       type: duckdb
-      database: db.db
-      # concurrent_tasks: 1
-      # register_comments: True
-      # pre_ping: False
-      # pretty_sql: False
-      # schema_differ_overrides: 
-      # catalog_type_overrides: 
-      # catalogs: 
-      # extensions: 
-      # connector_config: 
-      # secrets: 
-      # filesystems: 
-      # token: 
+      catalogs:
+        my_lakehouse:
+          type: ducklake
+          path: >-
+            postgres:dbname={{ env_var('POSTGRES_DB') }}
+            user={{ env_var('POSTGRES_USER') }}
+            password={{ env_var('POSTGRES_PASSWORD') }}
+            host={{ env_var('POSTGRES_HOST') }}
+            port={{ env_var('POSTGRES_PORT', '5432') }}
+            sslmode=require
+          data_path: "{{ env_var('S3_BUCKET_URL') }}"
+
+      extensions:
+        - ducklake
+        - postgres
+        - httpfs
+      secrets:
+        - type: s3
+          region: "{{ env_var('AWS_REGION') }}"
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          endpoint: "{{ env_var('ENDPOINT_URL') }}"
+
+    state_connection:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5432') }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      database: "{{ env_var('POSTGRES_DB') }}"
+      sslmode: "require"
 
 default_gateway: duckdb
 
@@ -40,3 +54,20 @@ linter:
     - ambiguousorinvalidcolumn
     - invalidselectstarexpansion
     - noambiguousprojections
+
+# GitHub CICD Bot Configuration
+cicd_bot:
+  type: github
+  # Enable auto-categorization for changes
+  auto_categorize_changes:
+    external: full  # Never prompt the user for input, instead fall back to the most conservative category 
+    python: full
+    sql: full
+    seed: full
+  # PR environment settings
+  default_pr_start: "1 week ago"
+  skip_pr_backfill: false
+  # Production deployment settings - DESYNCHRONIZED APPROACH 
+  run_on_deploy_to_prod: false  # Disable automatic production deployments
+  # Don't invalidate environment after deploy to allow for rollbacks
+  invalidate_environment_after_deploy: false
