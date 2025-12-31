@@ -1,28 +1,27 @@
 gateways:
-  duckdb:
+  ducklake:
     connection:
       type: duckdb
       catalogs:
-        my_lakehouse:
+        lakehouse:
           type: ducklake
-          path: >-
-            postgres:dbname={{ env_var('POSTGRES_DB') }}
-            user={{ env_var('POSTGRES_USER') }}
-            password={{ env_var('POSTGRES_PASSWORD') }}
-            host={{ env_var('POSTGRES_HOST') }}
-            port={{ env_var('POSTGRES_PORT', '5432') }}
-            sslmode=require
+          # path: 'catalog.ducklake'
+          path: postgres:dbname={{ env_var('POSTGRES_DB') }} user={{ env_var('POSTGRES_USER') }} password={{ env_var('POSTGRES_PASSWORD') }} host={{ env_var('POSTGRES_HOST') }} port={{ env_var('POSTGRES_PORT', '5432') }} sslmode=require
+          # We use the S3 scheme for R2 because DuckDB speaks "S3-compatible" storage via httpfs.
+          # Point the S3 secret at your Cloudflare R2 endpoint (see `secrets:` below).
           data_path: "{{ env_var('S3_BUCKET_URL') }}"
+          # encrypted: true
+          metadata_schema: lakehouse
 
       extensions:
         - ducklake
-        - postgres
         - httpfs
       secrets:
+        # Cloudflare R2 via S3-compatible credentials.
         - type: s3
-          region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          region: "{{ env_var('AWS_REGION', 'auto') }}"
           endpoint: "{{ env_var('ENDPOINT_URL') }}"
 
     state_connection:
@@ -34,7 +33,7 @@ gateways:
       database: "{{ env_var('POSTGRES_DB') }}"
       sslmode: "require"
 
-default_gateway: duckdb
+default_gateway: ducklake
 
 # --- Model Defaults ---
 # https://sqlmesh.readthedocs.io/en/stable/reference/model_configuration/#model-defaults
