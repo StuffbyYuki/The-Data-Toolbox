@@ -8,5 +8,5 @@ dependencies = [
     "dlt[ducklake]>=1.20.0",
     "psycopg2-binary>=2.9.11",
     "python-dotenv>=1.2.1",
-    "sqlmesh[duckdb]>=0.227.1",
+    "sqlmesh[ducklake]>=0.228.1",
 ]
