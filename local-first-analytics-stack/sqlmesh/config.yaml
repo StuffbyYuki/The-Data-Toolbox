@@ -53,19 +53,5 @@ linter:
     - invalidselectstarexpansion
     - noambiguousprojections
 
-# GitHub CICD Bot Configuration
-cicd_bot:
-  type: github
-  # Enable auto-categorization for changes
-  auto_categorize_changes:
-    external: full  # Never prompt the user for input, instead fall back to the most conservative category 
-    python: full
-    sql: full
-    seed: full
-  # PR environment settings
-  default_pr_start: "1 week ago"
-  skip_pr_backfill: false
-  # Production deployment settings - DESYNCHRONIZED APPROACH 
-  run_on_deploy_to_prod: false  # Disable automatic production deployments
-  # Don't invalidate environment after deploy to allow for rollbacks
-  invalidate_environment_after_deploy: false
+# Add your GitHub CICD Bot Configuration
+# Refer to the documentation for more details: https://sqlmesh.readthedocs.io/en/stable/integrations/github/
