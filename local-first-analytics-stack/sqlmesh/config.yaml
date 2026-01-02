@@ -8,8 +8,8 @@ gateways:
           # path: 'catalog.ducklake'
           path: postgres:dbname={{ env_var('POSTGRES_DB') }} user={{ env_var('POSTGRES_USER') }} password={{ env_var('POSTGRES_PASSWORD') }} host={{ env_var('POSTGRES_HOST') }} port={{ env_var('POSTGRES_PORT', '5432') }} sslmode=require
           # We use the S3 scheme for R2 because DuckDB speaks "S3-compatible" storage via httpfs.
-          data_path: "{{ env_var('S3_BUCKET_URL') }}"
-          metadata_schema: lakehouse
+          data_path: "{{ env_var('DUCKLAKE_DATA_PATH') }}"
+          metadata_schema: "{{ env_var('DUCKLAKE_NAME') }}"
 
       extensions:
         - ducklake
@@ -21,7 +21,7 @@ gateways:
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
           region: "{{ env_var('AWS_REGION', 'auto') }}"
           # R2 is S3-compatible, but DuckDB expects the endpoint as a host (no scheme).
-          endpoint: "{{ env_var('ENDPOINT_URL').replace('https://', '')}}"
+          endpoint: "{{ env_var('R2_S3_ENDPOINT').replace('https://', '')}}"
 
     state_connection:
       type: postgres
