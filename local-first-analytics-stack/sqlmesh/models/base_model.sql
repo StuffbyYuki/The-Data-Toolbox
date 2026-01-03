@@ -1,7 +1,7 @@
 MODEL (
   name lakehouse.base_model,
-  kind full,
-  cron '@daily',
+  kind view,
+  cron '@daily',  -- this view gets updated daily at 00:00 UTC
   grain (collision_id),
   columns (
     collision_id BIGINT,
