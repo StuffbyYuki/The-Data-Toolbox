@@ -1,4 +1,4 @@
-.PHONY: help sync ingest sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily gh-secrets
+.PHONY: help sync dlt-ingest sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily-run set-gh-secrets
 
 # Use bash so we can reliably `set -a` and source env files in targets.
 SHELL := /usr/bin/env bash
@@ -19,20 +19,20 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@echo "  make sync           - Install/sync Python deps with uv"
-	@echo "  make ingest         - Run dlt ingestion (NYC Open Data -> DuckLake)"
+	@echo "  make dlt-ingest     - Run dlt ingestion (NYC Open Data -> DuckLake)"
 	@echo "  make sqlmesh-info   - Run sqlmesh info"
 	@echo "  make sqlmesh-plan   - Run sqlmesh plan (interactive)"
 	@echo "  make sqlmesh-plan-dev [DEV=dev_name] - Run sqlmesh plan for a dev env (defaults to dev)"
 	@echo "  make sqlmesh-run    - Run sqlmesh run prod"
 	@echo "  make sqlmesh-run-dev [DEV=dev_name]  - Run sqlmesh run for a dev env (defaults to dev)"
-	@echo "  make daily          - ingest + sqlmesh migrate + sqlmesh run prod"
-	@echo "  make gh-secrets     - Push required GitHub Actions secrets from .env (requires gh)"
+	@echo "  make daily-run      - dlt ingest + sqlmesh migrate + sqlmesh run prod"
+	@echo "  make set-gh-secrets - Push required GitHub Actions secrets from .env (requires gh)"
 	@echo ""
 
 sync:
 	cd "$(ROOT)" && uv sync
 
-ingest:
+dlt-ingest:
 	@$(WITH_ENV) cd "$(ROOT)/dlt" && uv run python rest_api_pipeline.py
 
 sqlmesh-info:
@@ -53,9 +53,9 @@ sqlmesh-run:
 sqlmesh-run-dev:
 	@$(WITH_ENV) cd "$(ROOT)/sqlmesh" && uv run sqlmesh run "$(DEV)"
 
-daily: ingest sqlmesh-migrate sqlmesh-run
+daily-run: dlt-ingest sqlmesh-migrate sqlmesh-run
 
-gh-secrets:
+set-gh-secrets:
 	cd "$(ROOT)" && ENV_FILE="$(ROOT)/.env" ./set_github_actions_secrets_from_env.sh
 
 
