@@ -11,7 +11,7 @@ set -euo pipefail
 # - Secrets are sourced from your current shell environment (recommended) OR an env file.
 #
 # Usage:
-#   ./local-first-analytics-stack/set_github_actions_secrets_from_env.sh [OWNER/REPO]
+#   ./set_github_actions_secrets_from_env.sh [OWNER/REPO]
 #
 # Optional:
 #   ENV_FILE=local-first-analytics-stack/.env ./scripts/set_github_actions_secrets_from_env.sh OWNER/REPO
