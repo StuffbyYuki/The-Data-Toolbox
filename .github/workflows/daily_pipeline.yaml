@@ -1,0 +1,74 @@
+name: Daily pipeline (dlt → sqlmesh)
+
+on:
+  schedule:
+    # Daily at 00:00 UTC (midnight)
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  daily:
+    runs-on: blacksmith-8vcpu-ubuntu-2404
+    defaults:
+      run:
+        working-directory: local-first-analytics-stack
+    env:
+      # Base env vars used by SQLMesh (`sqlmesh/config.yaml`)
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+
+      DUCKLAKE_DATA_PATH: ${{ secrets.DUCKLAKE_DATA_PATH }}
+      DUCKLAKE_NAME: ${{ secrets.DUCKLAKE_NAME }}
+
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      R2_S3_ENDPOINT: ${{ secrets.R2_S3_ENDPOINT }}
+
+      # dlt-specific (source auth)
+      SOURCES__REST_API__NYC_OPEN_DATA_APP_TOKEN: ${{ secrets.SOURCES__REST_API__NYC_OPEN_DATA_APP_TOKEN }}
+
+      # dlt-specific (destination config) — derived from the base vars above.
+      # This avoids needing to store duplicate destination secrets.
+      DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL: ${{ secrets.DUCKLAKE_DATA_PATH }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__ENDPOINT_URL: https://${{ secrets.R2_S3_ENDPOINT }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__REGION_NAME: ${{ secrets.AWS_REGION }}
+      DESTINATION__DUCKLAKE__CREDENTIALS__DUCKLAKE_NAME: ${{ secrets.DUCKLAKE_NAME }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install uv
+          uv sync
+
+      - name: Run dlt ingestion
+        run: |
+          cd dlt
+          uv run python rest_api_pipeline.py
+
+      - name: Run SQLMesh (migrate + run)
+        run: |
+          cd sqlmesh
+          uv run sqlmesh migrate
+          uv run sqlmesh run prod
+
+
