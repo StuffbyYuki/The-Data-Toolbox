@@ -1,4 +1,4 @@
-.PHONY: help sync ingest sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-run daily gh-secrets
+.PHONY: help sync ingest sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily gh-secrets
 
 # Use bash so we can reliably `set -a` and source env files in targets.
 SHELL := /usr/bin/env bash
