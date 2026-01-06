@@ -2,7 +2,7 @@ MODEL (
   name lakehouse.incremental_model,
   kind INCREMENTAL_BY_TIME_RANGE (
     time_column crash_date,
-    lookback 2  -- 
+    lookback 2  -- look at 2 extra days of data to handle late arriving data
   ),
   cron '@daily',  -- this model runs daily at 00:00 UTC
   grain (collision_id),
