@@ -21,7 +21,7 @@ def nyc_open_data_source():
         ),
     )
 
-    @dlt.resource(write_disposition="replace")
+    @dlt.resource(write_disposition="replace", max_table_nesting=0)
     def motor_vehicle_collisions():
         for page in client.paginate("h9gi-nx95"):
             yield page

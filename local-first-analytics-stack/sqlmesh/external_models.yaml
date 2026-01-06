@@ -23,9 +23,7 @@
     zip_code: TEXT
     latitude: TEXT
     longitude: TEXT
-    location__latitude: TEXT
-    location__longitude: TEXT
-    location__human_address: TEXT
+    location: JSON
     contributing_factor_vehicle_3: TEXT
     vehicle_type_code_3: TEXT
     cross_street_name: TEXT
