@@ -2,7 +2,7 @@ MODEL (
   name lakehouse.full_model,
   kind FULL, 
   cron '@daily',  -- this model runs daily at 00:00 UTC
-  grain (crash_date, zipcode, contributing_factor, vehicle_type),
+  grain (crash_date, zip_code, contributing_factor, vehicle_type),
   partitioned_by crash_date,
   clustered_by (contributing_factor, vehicle_type, zip_code),
   description """
