@@ -2,7 +2,9 @@ MODEL (
   name lakehouse.full_model,
   kind FULL, 
   cron '@daily',  -- this model runs daily at 00:00 UTC
-  grain (crash_date, borough, contributing_factor, vehicle_type),
+  grain (crash_date, zipcode, contributing_factor, vehicle_type),
+  partitioned_by crash_date,
+  clustered_by (contributing_factor, vehicle_type, zip_code),
   description """
     - Full model for the NYC Open Data Motor Vehicle Collisions dataset. 
     - Aggregates over collisions by date, borough, contributing factor, and vehicle type.
