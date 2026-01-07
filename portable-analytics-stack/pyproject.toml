@@ -1,5 +1,5 @@
 [project]
-name = "local-first-analytics-stack"
+name = "portable-analytics-stack"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

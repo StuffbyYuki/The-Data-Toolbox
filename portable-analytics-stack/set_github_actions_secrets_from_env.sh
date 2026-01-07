@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Sets the GitHub Actions secrets required by:
-# - `local-first-analytics-stack/sqlmesh/config.yaml` (SQLMesh)
-# - `local-first-analytics-stack/dlt/rest_api_pipeline.py` (dlt)
+# - `portable-analytics-stack/sqlmesh/config.yaml` (SQLMesh)
+# - `portable-analytics-stack/dlt/rest_api_pipeline.py` (dlt)
 #
 # Requirements:
 # - GitHub CLI installed: https://cli.github.com/
@@ -14,7 +14,7 @@ set -euo pipefail
 #   ./set_github_actions_secrets_from_env.sh [OWNER/REPO]
 #
 # Optional:
-#   ENV_FILE=local-first-analytics-stack/.env ./scripts/set_github_actions_secrets_from_env.sh OWNER/REPO
+#   ENV_FILE=portable-analytics-stack/.env ./scripts/set_github_actions_secrets_from_env.sh OWNER/REPO
 #
 # Notes:
 # - This script NEVER prints secret values.
@@ -62,7 +62,7 @@ require() {
   fi
 }
 
-# Required by `local-first-analytics-stack/sqlmesh/config.yaml`
+# Required by `portable-analytics-stack/sqlmesh/config.yaml`
 SQLMESH_VARS=(
   POSTGRES_HOST
   POSTGRES_PORT

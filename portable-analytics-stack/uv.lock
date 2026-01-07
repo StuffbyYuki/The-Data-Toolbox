@@ -451,7 +451,7 @@ wheels = [
 ]
 
 [[package]]
-name = "local-first-analytics-stack"
+name = "portable-analytics-stack"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
