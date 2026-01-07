@@ -1,7 +1,7 @@
 {
-  "name": "local-first-analytics-stack",
+  "name": "portable-analytics-stack",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "postCreateCommand": "pip install -U pip && pip install uv && cd local-first-analytics-stack && uv sync",
+  "postCreateCommand": "pip install -U pip && pip install uv && cd portable-analytics-stack && uv sync",
   "customizations": {
     "vscode": {
       "settings": {

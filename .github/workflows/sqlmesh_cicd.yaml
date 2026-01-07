@@ -13,7 +13,7 @@ on:
       - opened
       - closed
     paths:
-      - 'local-first-analytics-stack/sqlmesh/**'
+      - 'portable-analytics-stack/sqlmesh/**'
 
 # The latest commit is the one that will be used to create the PR environment and deploy to production
 concurrency:
@@ -36,7 +36,7 @@ jobs:
     name: SQLMesh CI
     runs-on: ubuntu-latest
     env:
-      # Required by `local-first-analytics-stack/sqlmesh/config.yaml`
+      # Required by `portable-analytics-stack/sqlmesh/config.yaml`
       POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
       POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
@@ -53,7 +53,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: local-first-analytics-stack
+        working-directory: portable-analytics-stack
     steps:
       - name: Checkout PR branch
         uses: actions/checkout@v4
@@ -94,7 +94,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           uv run sqlmesh_cicd \
-            -p ${{ github.workspace }}/local-first-analytics-stack/sqlmesh \
+            -p ${{ github.workspace }}/portable-analytics-stack/sqlmesh \
             github --token ${{ secrets.GITHUB_TOKEN }} run-all
 
       - name: Deploy to Production (merge)
@@ -103,5 +103,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           uv run sqlmesh_cicd \
-            -p ${{ github.workspace }}/local-first-analytics-stack/sqlmesh \
+            -p ${{ github.workspace }}/portable-analytics-stack/sqlmesh \
             github --token ${{ secrets.GITHUB_TOKEN }} deploy-production

@@ -15,7 +15,7 @@ endef
 
 help:
 	@echo ""
-	@echo "local-first-analytics-stack"
+	@echo "portable-analytics-stack"
 	@echo ""
 	@echo "Targets:"
 	@echo "  make sync           - Install/sync Python deps with uv"
