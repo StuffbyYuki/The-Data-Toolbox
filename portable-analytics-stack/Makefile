@@ -1,4 +1,4 @@
-.PHONY: help sync dlt-ingest sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily-run set-gh-secrets
+.PHONY: help sync dlt-ingest dlt-pipeline-info sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily-run set-gh-secrets
 
 # Use bash so we can reliably `set -a` and source env files in targets.
 SHELL := /usr/bin/env bash
@@ -20,6 +20,7 @@ help:
 	@echo "Targets:"
 	@echo "  make sync           - Install/sync Python deps with uv"
 	@echo "  make dlt-ingest     - Run dlt ingestion (NYC Open Data -> DuckLake)"
+	@echo "  make dlt-pipeline-info       - Show dlt pipeline info (nyc_open_data_pipeline)"
 	@echo "  make sqlmesh-info   - Run sqlmesh info"
 	@echo "  make sqlmesh-plan   - Run sqlmesh plan (interactive)"
 	@echo "  make sqlmesh-plan-dev [DEV=dev_name] - Run sqlmesh plan for a dev env (defaults to dev)"
@@ -34,6 +35,9 @@ sync:
 
 dlt-ingest:
 	@$(WITH_ENV) cd "$(ROOT)/dlt" && uv run python rest_api_pipeline.py
+
+dlt-pipeline-info:
+	@$(WITH_ENV) cd "$(ROOT)/dlt" && uv run dlt pipeline nyc_open_data_pipeline info
 
 sqlmesh-info:
 	@$(WITH_ENV) cd "$(ROOT)/sqlmesh" && uv run sqlmesh info
