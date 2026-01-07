@@ -12,6 +12,7 @@ MODEL (
   column_descriptions (
     crash_date = "Occurrence date of collision",
     zip_code = "Postal code of incident occurrence",
+    collision_count = "Total number of collisions",
     total_number_of_persons_injured = "Total number of persons injured",
     total_number_of_persons_killed = "Total number of persons killed",
     contributing_factor = "Factors contributing to the collision for designated vehicle",
@@ -29,6 +30,7 @@ SELECT
   zip_code,
   contributing_factor_vehicle_1 as contributing_factor, 
   vehicle_type_code1 as vehicle_type,
+  COUNT(*) as collision_count,
   SUM(number_of_persons_injured) as total_number_of_persons_injured,
   SUM(number_of_persons_killed) as total_number_of_persons_killed,
   CURRENT_TIMESTAMP() AS _lakehouse_loaded_at
