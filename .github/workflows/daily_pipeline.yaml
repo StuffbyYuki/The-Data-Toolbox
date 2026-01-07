@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   daily:
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: local-first-analytics-stack

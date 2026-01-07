@@ -34,7 +34,7 @@ permissions:
 jobs:
   sqlmesh:
     name: SQLMesh CI
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     env:
       # Required by `local-first-analytics-stack/sqlmesh/config.yaml`
       POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
