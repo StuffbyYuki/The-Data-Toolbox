@@ -1,4 +1,4 @@
-.PHONY: help sync dlt-ingest dlt-pipeline-info sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev daily-run set-gh-secrets
+.PHONY: help sync dlt-ingest dlt-pipeline-info sqlmesh-info sqlmesh-migrate sqlmesh-plan sqlmesh-plan-dev sqlmesh-run sqlmesh-run-dev sqlmesh-fetchdf sqlmesh-ui daily-run set-gh-secrets
 
 # Use bash so we can reliably `set -a` and source env files in targets.
 SHELL := /usr/bin/env bash
@@ -6,6 +6,7 @@ SHELL := /usr/bin/env bash
 ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 ENV_FILE ?= $(ROOT)/.env
 DEV ?= dev
+QUERY ?=
 
 # Load $(ENV_FILE) into the process environment for a single command.
 # (Similar to python-dotenv / `dotenv run -- ...`, but implemented as a shell snippet.)
@@ -26,6 +27,8 @@ help:
 	@echo "  make sqlmesh-plan-dev [DEV=dev_name] - Run sqlmesh plan for a dev env (defaults to dev)"
 	@echo "  make sqlmesh-run    - Run sqlmesh run prod"
 	@echo "  make sqlmesh-run-dev [DEV=dev_name]  - Run sqlmesh run for a dev env (defaults to dev)"
+	@echo "  make sqlmesh-fetchdf QUERY='select * from ...' - Run sqlmesh fetchdf with a SQL query"
+	@echo "  make sqlmesh-ui     - Run sqlmesh UI"
 	@echo "  make daily-run      - dlt ingest + sqlmesh migrate + sqlmesh run prod"
 	@echo "  make set-gh-secrets - Push required GitHub Actions secrets from .env (requires gh)"
 	@echo ""
@@ -56,6 +59,17 @@ sqlmesh-run:
 
 sqlmesh-run-dev:
 	@$(WITH_ENV) cd "$(ROOT)/sqlmesh" && uv run sqlmesh run "$(DEV)"
+
+sqlmesh-fetchdf:
+	@if [[ -z "$(strip $(QUERY))" ]]; then \
+		echo "ERROR: QUERY is required"; \
+		echo "Usage: make sqlmesh-fetchdf QUERY='select * from ...'"; \
+		exit 2; \
+	fi
+	@$(WITH_ENV) cd "$(ROOT)/sqlmesh" && uv run sqlmesh fetchdf "$(QUERY)"
+
+sqlmesh-ui:
+	@$(WITH_ENV) cd "$(ROOT)/sqlmesh" && uv run sqlmesh ui
 
 daily-run: dlt-ingest sqlmesh-migrate sqlmesh-run
 
