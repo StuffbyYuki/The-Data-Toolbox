@@ -1,4 +1,4 @@
-## portable-analytics-stack
+## Portable Analytics Stack
 
 A local-first analytics template:
 
