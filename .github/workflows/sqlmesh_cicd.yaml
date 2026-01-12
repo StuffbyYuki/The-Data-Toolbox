@@ -86,6 +86,7 @@ jobs:
       
       - name: SQLMesh Migrate
         run: |
+          cd sqlmesh
           uv run sqlmesh migrate
 
       - name: Run SQLMesh CI/CD Bot (PR)
@@ -93,6 +94,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cd sqlmesh
           uv run sqlmesh_cicd \
             -p ${{ github.workspace }}/portable-analytics-stack/sqlmesh \
             github --token ${{ secrets.GITHUB_TOKEN }} run-all
@@ -102,6 +104,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cd sqlmesh
           uv run sqlmesh_cicd \
             -p ${{ github.workspace }}/portable-analytics-stack/sqlmesh \
             github --token ${{ secrets.GITHUB_TOKEN }} deploy-production
