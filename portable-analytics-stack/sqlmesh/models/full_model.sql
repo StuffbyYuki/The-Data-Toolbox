@@ -33,7 +33,7 @@ SELECT
   COUNT(*) as collision_count,
   SUM(number_of_persons_injured) as total_number_of_persons_injured,
   SUM(number_of_persons_killed) as total_number_of_persons_killed,
-  CURRENT_TIMESTAMP() AS _lakehouse_loaded_at
+  CURRENT_TIMESTAMP() AS _lakehouse_loaded_at,
   "A newly added column for CI/CD" as a_new_column
 
 FROM lakehouse.incremental_model
